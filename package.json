@@ -1,7 +1,7 @@
 {
-  "name": "react-project",
+  "name": "growth",
   "version": "0.1.0",
-  "homepage": "/react-project",
+  "homepage": "/growth",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.4",
