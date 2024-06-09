@@ -1,0 +1,18 @@
+.AdviceContainer {
+    display: flex;
+    flex-flow: row wrap;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding: 40px 0 15px 0;
+    justify-items: center;
+    justify-content: center;
+    margin: 30px 0 30px 0;;
+  }
+
+
+.blueHeading {
+color: #233349;
+font-size: 30px;
+text-align: center;
+margin: 0;
+}

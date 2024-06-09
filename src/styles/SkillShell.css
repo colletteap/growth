@@ -1,0 +1,71 @@
+.blueBody {
+    background-color: #233349;
+}
+
+.whiteLandingContainer {
+  background-color: #fcf9da;
+  width: auto;
+}
+
+.topGrid {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.img {
+  width: 80%;
+  height: 100%;
+}
+
+.dropDownContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.imgContainer {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0px 10px;
+  padding: 20px;
+  width: auto;
+  height: 100%;
+}
+
+.imgContainerSm {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0px 5px;
+  padding: 10px;
+  width: 70%;
+}
+
+@media (max-width: 768px) {
+  .imgContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+    padding-bottom: 20px;
+  }
+  .img {
+    width: 35%;
+  }
+  h2 {
+    margin: 10px;
+  }
+}
+
+.skillCardContainer {
+  display: flex;
+}
+
+
+
+

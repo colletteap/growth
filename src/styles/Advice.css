@@ -1,0 +1,61 @@
+.SearchBarContainer {
+  display: grid;
+  justify-items: center;
+  align-items: end;
+}
+
+.centeredContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.medImg {
+  width: 60%;
+  min-width: 300px;
+  max-width: 500px;
+}
+
+.magicBand {
+  width: 100%;
+  max-width: 1440px;
+}
+
+.center {
+  text-align: center;
+}
+
+.questionButtonContainer {
+  display: flex;
+  flex-flow: row wrap;
+  width: auto;
+  justify-content: center;
+  gap: 200px;
+  justify-items: center;
+  align-items: center;
+  height: auto;
+}
+
+.receiveAdviceDiv {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  gap: 40px;
+  padding: 30px 40px 20px 40px;
+  background-color: #233349;
+  justify-items: center;
+}
+
+@media (max-width: 1000px) {
+  .AdviceContainer {
+    padding-left: 20px;
+  }
+  .questionButtonContainer {
+    gap: 43px;
+    margin: 0;
+  }
+  h2 {
+    transform: scale(0.8);
+  }
+}

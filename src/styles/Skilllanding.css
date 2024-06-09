@@ -1,0 +1,34 @@
+.SkillContainer {
+  display: flex;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 35px 0 20px 0;
+  justify-items: center;
+  justify-content: center;
+}
+
+.skillButton {
+  display: flex;
+  justify-content: center;
+  /* margin-top: 40px;
+  padding-bottom: 30px;
+  transform: scale(1.8); */
+}
+
+.skillButton button {
+  color: #233349;
+  cursor: pointer;
+}
+
+.whiteHeading {
+  color: #ffff;
+  font-size: 30px;
+  text-align: center;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .skillButton {
+    display: none;
+  }
+}

@@ -1,0 +1,47 @@
+.App {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  font-family: "Quicksand", sans-serif;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  background-color: #fcf9da;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  padding-top: 50px;
+}
+
+h2 {
+  color: #233349;
+
+  font-size: 40px;
+}
+
+h3 {
+  color: #233349;
+
+  font-size: 20px;
+  margin: 0;
+  padding: 5px 0 5px 0;
+}
+
+h4 {
+  color: #233349;
+
+  margin: 0;
+  padding: 5px 0 5px 0;
+  font-weight: bolder;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  width: auto;
+}
