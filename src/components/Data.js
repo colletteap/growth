@@ -8,21 +8,15 @@ const skillData = [
   { skill: "Technology", linkTo: "/SkillShell/Technology" },
   { skill: "Classroom Management", linkTo: "/SkillShell/Classroom-Management" },
   { skill: "Life Work Balance", linkTo: "/SkillShell/Life-Work-Balance" },
-  { skill: "Art", linkTo: "/SkillShell/Art" },
-  { skill: "Home Economics", linkTo: "/SkillShell/Home-Economics" },
   { skill: "Boundary Setting", linkTo: "/SkillShell/Boundary-Setting" },
   { skill: "Time Management", linkTo: "/SkillShell/Time-Management" },
   { skill: "Organization", linkTo: "/SkillShell/Organization" },
-  { skill: "Physical Education", linkTo: "/SkillShell/Physical-Education" },
-  { skill: "Conflict Management", linkTo: "/SkillShell/Conflict-Management" },
   { skill: "Soft Skills", linkTo: "/SkillShell/Soft-Skills" },
   { skill: "Behaviour Management", linkTo: "/SkillShell/Behaviour-Management" },
   { skill: "Powerschool", linkTo: "/SkillShell/Powerschool" },
-  { skill: "Resourcefulness", linkTo: "/SkillShell/Resourcefulness" },
   { skill: "Critical Thinking", linkTo: "/SkillShell/Critical-Thinking" },
   { skill: "Leadership", linkTo: "/SkillShell/Leadership" },
-  { skill: "Creativity", linkTo: "/SkillShell/Creativity" },
-  { skill: "Relationships", linkTo: "/SkillShell" },
+  { skill: "More +", linkTo: "/SkillShell" },
 ];
 
 const adviceData = [
@@ -60,13 +54,6 @@ const blogData = [
       "Brene Brown has a Ph.D. in the social work field, has a very popular Ted talk, and has a Netflix special based around personal development so that you can bring your best self into every situation.",
     linkTo: "/Blog",
     image: BlogLanding2,
-  },
-  {
-    title: "The Happy Teacher Planner",
-    content:
-      "With this planner, you can use a personalized calendar to keep track of special events and your to-do list; focus on your personal growth through using a reflective journal and core values list; has a substitute plan and has resources for the tough times.",
-    linkTo: "/Blog",
-    image: BlogLanding3,
   },
   {
     title: "The Burned In Teacher",

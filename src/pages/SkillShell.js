@@ -67,11 +67,10 @@ export default function SkillShellPage() {
         </Grid>
       </Grid>
       <Grid sx={{ padding: "60px 20px 20px 20px" }}>
-        {mini && (
+        
           <Grid className="dropDownContainer">
             <SkillShellDropDown onChange={handleSkillSelect} />
           </Grid>
-        )}
         {matches && (
           <Grid className="SkillContainer">
             {skillShellData.map((skill, index) => (

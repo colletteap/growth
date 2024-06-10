@@ -7,18 +7,23 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
 import CustomButton from "../soundReact/customButton";
+import { useMediaQuery } from "@mui/material";
 
 export default function Landingblogcard({ content, title, linkTo, image }) {
+  const isMobile = useMediaQuery("(max-width:769px)");
   return (
     <Card
-      sx={{
-        maxWidth: 345,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        borderRadius: "15px",
-      }}
+    sx={{
+      maxWidth: 395,
+      display: "flex",
+      justifyContent: "center",
+      justifySelf: "stretch",
+      alignItems: "center",
+      flexDirection: "column",
+      borderRadius: "20px",
+      width: isMobile ? "80%" : "100%",
+      height: isMobile ? "50%" : "80%",
+    }}
     >
       <CardHeader
         title={title}
