@@ -1,8 +1,8 @@
 import React from "react";
 import Grid from "@mui/joy/Grid";
 import { Link } from "react-router-dom";
-import LargeLogo from "../assets/GrowthBlueHQ.png";
-import LogoText from "../assets/TopGridText.png";
+import LargeLogo from "../assets/GrowthQS.png";
+import LogoText from "../assets/NewInfo.png";
 import GrowthSM from "../assets/GrowthSM.svg";
 import smallTop from "../assets/smallTop.svg";
 import "../styles/Gridlanding.css";
