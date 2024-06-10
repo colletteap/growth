@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/growth/static/css/main.9fdcd9ed.css",
-    "main.js": "/growth/static/js/main.4045f84a.js",
+    "main.css": "/growth/static/css/main.a5bfb5c5.css",
+    "main.js": "/growth/static/js/main.df564f1f.js",
     "static/js/488.7438f1e9.chunk.js": "/growth/static/js/488.7438f1e9.chunk.js",
     "static/media/bloglanding2.png": "/growth/static/media/bloglanding2.a074cf2e8a5ae64d49f5.png",
     "static/media/clicksound.wav": "/growth/static/media/clicksound.e0a5f7555b339b9bec67.wav",
-    "static/media/TopGridText.png": "/growth/static/media/TopGridText.f430df8b4fc121c5c8db.png",
+    "static/media/NewInfo.png": "/growth/static/media/NewInfo.df3a64d16c37a0de06a9.png",
     "static/media/smallTop.svg": "/growth/static/media/smallTop.cc914e7592013f3c93a1e906f36a12c7.svg",
     "static/media/BlogLanding5.png": "/growth/static/media/BlogLanding5.c29bf11c108e418b19aa.png",
     "static/media/bloglanding1.png": "/growth/static/media/bloglanding1.4fe292b0c9af6a7b47a7.png",
     "static/media/MagicSeg.png": "/growth/static/media/MagicSeg.a87517e62f3bc72294b0.png",
     "static/media/AdviceTextHQ.png": "/growth/static/media/AdviceTextHQ.e2a70a812c5210bcb2bf.png",
     "static/media/bloglanding3.png": "/growth/static/media/bloglanding3.54bf2204492cf4abc788.png",
-    "static/media/GrowthBlueHQ.png": "/growth/static/media/GrowthBlueHQ.06415a9bc13df85c7b62.png",
+    "static/media/GrowthQS.png": "/growth/static/media/GrowthQS.aa01a220e2af19179f65.png",
     "static/media/skill.png": "/growth/static/media/skill.2b6fb37fcfbce5977c9e.png",
     "static/media/BlogLanding4.png": "/growth/static/media/BlogLanding4.4e62a3b384d58ddad83f.png",
     "static/media/superhero.png": "/growth/static/media/superhero.508dc7fc035eb1976e40.png",
@@ -21,12 +21,12 @@
     "static/media/discover.png": "/growth/static/media/discover.4c18996eb0293246b8b7.png",
     "static/media/GrowthSM.svg": "/growth/static/media/GrowthSM.e0bb69cac592190787efb6aa4000a384.svg",
     "index.html": "/growth/index.html",
-    "main.9fdcd9ed.css.map": "/growth/static/css/main.9fdcd9ed.css.map",
-    "main.4045f84a.js.map": "/growth/static/js/main.4045f84a.js.map",
+    "main.a5bfb5c5.css.map": "/growth/static/css/main.a5bfb5c5.css.map",
+    "main.df564f1f.js.map": "/growth/static/js/main.df564f1f.js.map",
     "488.7438f1e9.chunk.js.map": "/growth/static/js/488.7438f1e9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9fdcd9ed.css",
-    "static/js/main.4045f84a.js"
+    "static/css/main.a5bfb5c5.css",
+    "static/js/main.df564f1f.js"
   ]
 }
