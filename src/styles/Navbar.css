@@ -5,7 +5,8 @@
   display: flex;
   flex-direction: row;
   font-family: "Quicksand", sans-serif;
-  font: bolder;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .navbar .logoNav {
