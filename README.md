@@ -26,10 +26,11 @@ Share or learn new skills, ask or answer questions, and check out the teacher to
 ******
 
 # **Motivation**
-I am a teacher who heard mentorship and colleague support helped alleviate the professional stressors of teaching.
+I am a teacher who has felt and has heard mentorship and colleague support helped alleviate the professional stressors of teaching.
+In many professions, having a mentor can make a huge difference. This website will act like a net of mentors working together to support each other.
 
 
 # **Appreciation**
   
-  Big thanks to @eti & @samwise-nl for coaching me through the Get Coding program so far!
+  Big thanks to @sir.Eti & @samwise-nl for coaching me through the Get Coding program so far!
 ******
