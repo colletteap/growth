@@ -8,7 +8,7 @@ Share or learn new skills, ask or answer questions, and check out the teacher to
 - This site is available through github pages: [Growth | Teachers Learning Together] (https://colletteap.github.io/react-project/#/)
 
 # **Live Demo Link**
-[Growth | Teachers Learning Together Demo]()
+[Growth | Teachers Learning Together Demo](https://www.loom.com/share/73af9301802f44eea1e8c7256a812dd6?sid=437980a6-9738-46ec-9a07-ec991ce9cf6a)
 
 # **Website Instructions**
 
