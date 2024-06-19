@@ -8,7 +8,7 @@ Share or learn new skills, ask or answer questions, and check out the teacher to
 - This site is available through github pages: [Growth | Teachers Learning Together] (https://colletteap.github.io/react-project/#/)
 
 # **Live Demo Link**
-[Growth | Teachers Learning Together Demo]()
+[Growth | Teachers Learning Together Demo](https://www.loom.com/share/73af9301802f44eea1e8c7256a812dd6?sid=437980a6-9738-46ec-9a07-ec991ce9cf6a)
 
 # **Website Instructions**
 
@@ -26,10 +26,11 @@ Share or learn new skills, ask or answer questions, and check out the teacher to
 ******
 
 # **Motivation**
-I am a teacher who heard mentorship and colleague support helped alleviate the professional stressors of teaching.
+I am a teacher who has felt and has heard mentorship and colleague support helped alleviate the professional stressors of teaching.
+In many professions, having a mentor can make a huge difference. This website will act like a net of mentors working together to support each other.
 
 
 # **Appreciation**
   
-  Big thanks to @eti & @samwise-nl for coaching me through the Get Coding program so far!
+  Big thanks to @sir.Eti & @samwise-nl for coaching me through the Get Coding program so far!
 ******
