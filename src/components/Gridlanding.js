@@ -9,6 +9,7 @@ import "../styles/Gridlanding.css";
 import SkillLanding from "./Skilllanding";
 import AdviceLanding from "./Advicelanding";
 import BlogLanding from "./Bloglanding";
+import HomepageFooter from "./components/HomepageFooter";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const GridLanding = () => {
@@ -42,6 +43,7 @@ const GridLanding = () => {
       </Grid>
       <Grid className="blueLandingContainer">
         <BlogLanding />
+        <HomepageFooter />
       </Grid>
     </>
   );

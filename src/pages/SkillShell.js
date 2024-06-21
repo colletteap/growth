@@ -9,6 +9,7 @@ import Community from "../assets/community.png";
 import SkillButton from "../components/Skillbutton";
 import BlankSkillCard from "../components/Blankskillcard";
 import SkillShellDropDown from "../components/SkillShellDropDown";
+import Footer from "./components/Footer";
 import { skillShellData } from "../components/Data";
 
 export default function SkillShellPage() {
@@ -89,6 +90,7 @@ export default function SkillShellPage() {
           <BlankSkillCard skillname={{ skillname: selectedButton }} />
         )}
       </Grid>
+      <Footer />
     </Grid>
   );
 }
