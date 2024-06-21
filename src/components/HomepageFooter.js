@@ -2,7 +2,7 @@ import React from "react";
 import Emailimg from "../assets/Emailimg.png";
 import LinkedInImg from "../assets/LinkedInImg.png";
 import YouTubeImg from "../assets/YouTubeImg.png";
-import GitHubImg from "../assets/GitHubImg.png";
+import GitHubImg from "../assets/Githubimg.png";
 import Grid from "@mui/joy/Grid";
 import { Link } from "react-router-dom";
 import Home from "../assets/Home.png";
@@ -15,13 +15,13 @@ function Footer() {
           <img
             src={Emailimg}
             alt="Email"
-            style={{ padding: "5px", width: "60%" }}
+            className="footer-img"
           />
         </a>
       </Grid>
       <Grid sx={{ width: "80px" }}>
         <Link to="/">
-          <img src={Home} alt="Home" style={{ padding: "5px", width: "60%" }} />
+          <img src={Home} alt="Home" className="footer-img" />
         </Link>
       </Grid>
       <Grid sx={{ width: "80px" }}>
@@ -29,7 +29,7 @@ function Footer() {
           <img
             src={LinkedInImg}
             alt="LinkedIn"
-            style={{ padding: "5px", width: "60%" }}
+            className="footer-img"
           />
         </a>
       </Grid>
@@ -38,7 +38,7 @@ function Footer() {
           <img
             src={YouTubeImg}
             alt="YouTube"
-            style={{ padding: "5px", width: "60%" }}
+            className="footer-img"
           />
         </a>
       </Grid>
@@ -47,9 +47,12 @@ function Footer() {
           <img
             src={GitHubImg}
             alt="GitHub"
-            style={{ padding: "5px", width: "60%" }}
+            className="footer-img"
           />
         </a>
+      </Grid>
+      <Grid>
+        <h1 className="footer-text" >Made by Collette Lane</h1>
       </Grid>
     </Grid>
   );
