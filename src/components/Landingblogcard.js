@@ -17,6 +17,7 @@ export default function Landingblogcard({ content, title, linkTo, image }) {
       maxWidth: 395,
       display: "flex",
       justifyContent: "center",
+      justifyItems: "center",
       justifySelf: "stretch",
       alignItems: "center",
       flexDirection: "column",

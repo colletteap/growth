@@ -2,10 +2,13 @@
     display: grid;
     width: auto;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 10px;
+    gap: 100px;
     padding: 20px;
     justify-items: center;
     align-items: center;
+    background-color: #233349;
+    padding-bottom: 10px;
+    justify-content: center;
   }
   
   @media (max-width: 768px) {
