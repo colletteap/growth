@@ -1,7 +1,7 @@
 import React from "react";
 import Emailimg from "../assets/Emailimg.png";
-import LinkedInImg from "../assets/LinkedInImg.png";
-import YouTubeImg from "../assets/YouTubeImg.png";
+import LinkedInImg from "../assets/Linkedinimg.png";
+import YouTubeImg from "../assets/Youtubeimg.png";
 import GitHubImg from "../assets/Githubimg.png";
 import Grid from "@mui/joy/Grid";
 import { Link } from "react-router-dom";
@@ -52,7 +52,7 @@ function Footer() {
         </a>
       </Grid>
       <Grid>
-        <h1 className="footer-text" >Made by Collette Lane</h1>
+        <p className="footer-text" >Made by Collette Lane</p>
       </Grid>
     </Grid>
   );

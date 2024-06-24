@@ -4,7 +4,7 @@ import Blogcard from "../components/Blogcard";
 import SearchBar from "../components/Searchbar";
 import "../styles/Blog.css";
 import { blogPageData, urls } from "../components/Data";
-import Footer from "./components/Footer";
+import Footer from "../components/Footer";
 import CustomButton from "../soundReact/customButton";
 
 function Blog() {

@@ -41,6 +41,7 @@ h4 {
   justify-content: center;
   justify-items: center;
   width: auto;
+  background-color: #fcf9da;
 }
 
 .footer-img {
@@ -53,4 +54,10 @@ h4 {
 .footer-text {
   float: right;
   font-size: 16px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  padding-left: 700px;
+  font-weight: bold;
 }

@@ -7,7 +7,7 @@ import PostCard from "../components/Postcard";
 import SearchBar from "../components/Searchbar";
 import Magic from "../assets/MagicSeg.png";
 import AdviceText from "../assets/AdviceTextHQ.png";
-import Footer from "./components/Footer";
+import Footer from "../components/Footer";
 import { askAdviceCardData } from "../components/Data";
 
 // Import statements
