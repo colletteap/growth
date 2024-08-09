@@ -1,9 +1,7 @@
 import React from "react";
 import Grid from "@mui/joy/Grid";
 import { Link } from "react-router-dom";
-import LargeLogo from "../assets/GrowthQS.png";
 import LogoText from "../assets/NewInfo.png";
-import GrowthSM from "../assets/GrowthSM.svg";
 import smallTop from "../assets/smallTop.svg";
 import "../styles/Gridlanding.css";
 import SkillLanding from "./Skilllanding";
@@ -11,6 +9,7 @@ import AdviceLanding from "./Advicelanding";
 import BlogLanding from "./Bloglanding";
 import HomepageFooter from "../components/HomepageFooter";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import ModalLoginForm from "./ModalLoginForm";
 
 const GridLanding = () => {
   const matches = useMediaQuery("(max-width:769px)");
@@ -20,10 +19,7 @@ const GridLanding = () => {
     <>
       <Grid className="GridContainer">
         <Grid className="ImageContainer">
-          {matches ? null : (<img src={LargeLogo} alt="Growth Logo" />)}
-          {min ? null : (
-            <img src={GrowthSM} style={{ paddingTop: "30px" }} alt="Growth" />
-          )}
+          <ModalLoginForm/>
         </Grid>
         <Grid className="ImageContainerText">
           {matches ? null : (<img src={LogoText} alt="LogoText" />)}
