@@ -18,12 +18,6 @@ const GridLanding = () => {
 
   return (
     <>
-      <Grid
-        sx={{ padding: "0 20px 20px 20px" }}
-        className="blueLandingContainer"
-      >
-        <SkillLanding />
-      </Grid>
       <Grid className="GridContainer">
         <Grid className="ImageContainer">
           {matches ? null : (<img src={LargeLogo} alt="Growth Logo" />)}
@@ -35,6 +29,12 @@ const GridLanding = () => {
           {matches ? null : (<img src={LogoText} alt="LogoText" />)}
            {min ? null : (<img src={smallTop} alt="Logo Explanation" />)}
         </Grid>
+      </Grid>
+      <Grid
+        sx={{ padding: "0 20px 20px 20px" }}
+        className="blueLandingContainer"
+      >
+        <SkillLanding />
       </Grid>
       <Grid className="adviceLandingContainer">
         <Link to="/Advice" className="textDeco">
