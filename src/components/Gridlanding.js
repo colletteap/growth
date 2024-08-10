@@ -9,7 +9,7 @@ import AdviceLanding from "./Advicelanding";
 import BlogLanding from "./Bloglanding";
 import HomepageFooter from "../components/HomepageFooter";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import ModalLoginForm from "./ModalLoginForm";
+import SignUpBox from "./SignUpBox";
 
 const GridLanding = () => {
   const matches = useMediaQuery("(max-width:769px)");
@@ -19,7 +19,7 @@ const GridLanding = () => {
     <>
       <Grid className="GridContainer">
         <Grid className="ImageContainer">
-          <ModalLoginForm/>
+          <SignUpBox/>
         </Grid>
         <Grid className="ImageContainerText">
           {matches ? null : (<img src={LogoText} alt="LogoText" />)}
