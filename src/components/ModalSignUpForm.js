@@ -1,11 +1,11 @@
 import React from 'react';
 import '../styles/Modal.css';
 
-function ModalLoginForm({ isOpen, onClose }) {
+function ModalSignUpForm({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   const handleOutsideClick = (event) => {
-    if (event.target.id === 'loginModal') {
+    if (event.target.id === 'signupModal') {
       onClose();
     }
   };
@@ -13,9 +13,9 @@ function ModalLoginForm({ isOpen, onClose }) {
   return (
     <>
     <div>
-        <h2>Login to Growth</h2>
+        <h2>Sign Up for Growth</h2>
     </div>
-    <div id="loginModal" className="modal" onClick={handleOutsideClick}>
+    <div id="signupModal" className="modal" onClick={handleOutsideClick}>
       <form className="modal-content animate" action="/action_page.php" method="post">
         <div className="imgcontainer">
           <span onClick={onClose} className="close" title="Close Modal">&times;</span>
@@ -23,7 +23,7 @@ function ModalLoginForm({ isOpen, onClose }) {
         </div>
 
         <div className="container">
-          <label htmlFor="uname"><b>Username</b></label>
+          <label htmlFor="email"><b>Email</b></label>
           <input type="text" placeholder="Enter Username" name="uname" required />
 
           <label htmlFor="psw"><b>Password</b></label>
@@ -45,4 +45,4 @@ function ModalLoginForm({ isOpen, onClose }) {
   );
 }
 
-export default ModalLoginForm;
+export default ModalSignUpForm;
