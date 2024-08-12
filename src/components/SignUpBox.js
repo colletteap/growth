@@ -11,7 +11,9 @@ return (
       gridTemplateRows: 'auto 1fr',
       justifyItems: 'center',
       alignItems: 'center',
-      height: '100vh',
+      minWidth: '100px',
+      maxWidth: '300px',
+      paddingLeft: '150px',
       textAlign: 'center'
     }}
   >
