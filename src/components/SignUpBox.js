@@ -7,18 +7,24 @@ return (
     <Grid
     container
     sx={{
-      display: 'grid',
-      gridTemplateRows: 'auto 1fr',
+      display: 'flex',
+      flexFlow: 'row wrap',
       justifyItems: 'center',
       alignItems: 'center',
       minWidth: '100px',
       maxWidth: '300px',
       paddingLeft: '150px',
-      textAlign: 'center'
+      textAlign: 'center',
+      backgroundColor: 'lightblue',
+borderRadius: '10px',
     }}
   >
     <Grid item>
-      <h2>Growth</h2>
+      <h2
+      sx={{
+        margin: '0',
+      }}>
+        Growth</h2>
     </Grid>
     <Grid item>
       <AuthButtons />
