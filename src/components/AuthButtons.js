@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ModalLoginForm from './ModalLoginForm';
 import ModalSignUpForm from './ModalSignUpForm';
+import Grid from "@mui/joy/Grid";
+import Button from '@mui/joy/Button';
 
 function AuthButtons() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -23,17 +25,44 @@ function AuthButtons() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around', margin: '20px' }}>
-      <button onClick={handleOpenLoginModal} style={{ padding: '10px 20px', cursor: 'pointer' }}>
+    <Grid style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+        gridGap: "10px",
+        padding: "10px",
+        justifyItems: "center",
+      }}
+      >
+      <Grid item xs={6}>
+        <Button sx={{
+          bgcolor: "#233349",
+          color: "#ffff",
+          fontWeight: "bolder",
+          borderRadius: "10px",
+          "&:hover": { backgroundColor: "#5378AB" },
+        }}
+        onClick={handleOpenLoginModal}
+        >
         Log In
-      </button>
-      <button onClick={handleOpenSignUpModal} style={{ padding: '10px 20px', cursor: 'pointer' }}>
+      </Button>
+      </Grid>
+      <Grid item xs={6}>
+      <Button sx={{
+          bgcolor: "#233349",
+          color: "#ffff",
+          fontWeight: "bolder",
+          borderRadius: "10px",
+          "&:hover": { backgroundColor: "#5378AB" },
+        }}
+        onClick={handleOpenSignUpModal}
+        >
         Sign Up
-      </button>
+      </Button>
+      </Grid>
 
       <ModalLoginForm isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
       <ModalSignUpForm isOpen={isSignUpModalOpen} onClose={handleCloseSignUpModal} />
-    </div>
+    </Grid>
   );
 }
 
