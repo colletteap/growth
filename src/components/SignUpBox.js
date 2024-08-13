@@ -13,7 +13,6 @@ return (
       alignItems: 'center',
       minWidth: '100px',
       maxWidth: '300px',
-      paddingLeft: '150px',
       textAlign: 'center',
       backgroundColor: 'lightblue',
 borderRadius: '10px',
