@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/Modal.css';
+import Grid from "@mui/joy/Grid";
 
 function ModalLoginForm({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -12,17 +13,15 @@ function ModalLoginForm({ isOpen, onClose }) {
 
   return (
     <>
-    <div>
-        <h2>Login to Growth</h2>
-    </div>
-    <div id="loginModal" className="modal" onClick={handleOutsideClick}>
+    <Grid id="loginModal" className="modal" onClick={handleOutsideClick}>
       <form className="modal-content animate" action="/action_page.php" method="post">
-        <div className="imgcontainer">
+        <Grid className="imgcontainer">
           <span onClick={onClose} className="close" title="Close Modal">&times;</span>
           <img src="img_avatar2.png" alt="Avatar" className="avatar" />
-        </div>
+        </Grid>
 
-        <div className="container">
+        <Grid className="container">
+        <h2>Login to Growth</h2>
           <label htmlFor="uname"><b>Username</b></label>
           <input type="text" placeholder="Enter Username" name="uname" required />
 
@@ -33,14 +32,14 @@ function ModalLoginForm({ isOpen, onClose }) {
           <label>
             <input type="checkbox" defaultChecked name="remember" /> Remember me
           </label>
-        </div>
+        </Grid>
 
-        <div className="container" style={{ backgroundColor: '#f1f1f1' }}>
+        <Grid className="container" style={{ backgroundColor: '#f1f1f1' }}>
           <button type="button" onClick={onClose} className="cancelbtn">Cancel</button>
           <span className="psw">Forgot <p>password?</p></span>
-        </div>
+        </Grid>
       </form>
-    </div>
+    </Grid>
     </>
   );
 }
