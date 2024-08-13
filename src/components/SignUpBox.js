@@ -19,11 +19,7 @@ borderRadius: '10px',
     }}
   >
     <Grid item>
-      <h2
-      sx={{
-        margin: '0',
-      }}>
-        Growth</h2>
+      <h2>Growth</h2>
     </Grid>
     <Grid item>
       <AuthButtons />
