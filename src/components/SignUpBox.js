@@ -14,6 +14,8 @@ return (
       alignItems: 'center',
       minWidth: '100px',
       maxWidth: '300px',
+      minHeight: '218px',
+      maxHeight: '300px',
       textAlign: 'center',
       backgroundColor: 'lightblue',
 borderRadius: '10px',
