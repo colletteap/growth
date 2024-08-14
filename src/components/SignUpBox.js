@@ -1,6 +1,7 @@
 import React from "react";
 import Grid from "@mui/joy/Grid";
 import AuthButtons from "./AuthButtons";
+import SignUpImg from "../assets/SignUpImg.png";
 
 const SignUpBox = () => {
 return (
@@ -19,7 +20,7 @@ borderRadius: '10px',
     }}
   >
     <Grid item>
-      <h2>Growth</h2>
+      <img src={SignUpImg} alt="sign up img"/>
     </Grid>
     <Grid item>
       <AuthButtons />
