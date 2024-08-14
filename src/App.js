@@ -4,6 +4,7 @@ import SkillShell from "./pages/SkillShell";
 import Advice from "./pages/Advice";
 import Blog from "./pages/Blog";
 import GridLanding from "./components/Gridlanding";
+import Profile from "./pages/Profile";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/SkillShell" element={<SkillShell />} />
           <Route path="/Advice" element={<Advice />} />
           <Route path="/Blog" element={<Blog />} />
+          <Route path="/Profile" element={<Profile/>}/>
           <Route path="*" element={<GridLanding />} />
         </Routes>
         
