@@ -20,7 +20,7 @@ borderRadius: '10px',
     }}
   >
     <Grid item>
-      <img src={SignUpImg} alt="sign up img" sx={{width: '50%'}}/>
+      <img src={SignUpImg} alt="sign up img" sx={{width: '50%', height: '50%'}}/>
     </Grid>
     <Grid item>
       <AuthButtons />
