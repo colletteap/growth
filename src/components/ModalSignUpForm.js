@@ -23,13 +23,13 @@ function ModalSignUpForm({ isOpen, onClose }) {
         </div>
 
         <div className="container">
-          <label htmlFor="email"><b>Email</b></label>
+          <label htmlFor="email"><b>Name</b></label>
           <input type="text" placeholder="Enter Username" name="uname" required />
 
-          <label htmlFor="psw"><b>Password</b></label>
+          <label htmlFor="psw"><b>Email</b></label>
           <input type="password" placeholder="Enter Password" name="psw" required />
 
-          <button type="submit">Login</button>
+          <button type="submit">Sign Up!</button>
           <label>
             <input type="checkbox" defaultChecked name="remember" /> Remember me
           </label>

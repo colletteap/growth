@@ -36,6 +36,7 @@ function AuthButtons() {
       <Grid item xs={6}>
         <Button sx={{
           bgcolor: "#233349",
+          width: "100%",
           color: "#ffff",
           fontWeight: "bolder",
           borderRadius: "10px",
@@ -49,6 +50,7 @@ function AuthButtons() {
       <Grid item xs={6}>
       <Button sx={{
           bgcolor: "#233349",
+          width: "100%",
           color: "#ffff",
           fontWeight: "bolder",
           borderRadius: "10px",
