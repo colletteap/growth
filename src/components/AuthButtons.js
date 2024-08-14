@@ -33,7 +33,15 @@ function AuthButtons() {
         justifyItems: "center",
       }}
       >
-      <Grid item xs={6}>
+      <Grid 
+  item 
+  xs={6} 
+  sx={{
+    '& .css-6yr8k6': {
+      '--Grid-columns': 'unset',
+    },
+  }}
+>
         <Button sx={{
           bgcolor: "#233349",
           width: "100%",
@@ -47,7 +55,15 @@ function AuthButtons() {
         Log In
       </Button>
       </Grid>
-      <Grid item xs={6}>
+      <Grid 
+  item 
+  xs={6} 
+  sx={{
+    '& .css-6yr8k6': {
+      '--Grid-columns': 'unset',
+    },
+  }}
+>
       <Button sx={{
           bgcolor: "#233349",
           width: "100%",
