@@ -1,13 +1,20 @@
-import React from 'react'
+import { Grid } from '@mui/joy';
+import React from 'react';
+import "../styles/Profile.css";
+import Avatar from "../assets/avatarplaceholder.png";
 
 function Profile() {
   return (
-    <div>
-      Picture
+    <>
+    <Grid className="ProfileContainer">
+      <h2>Profile</h2>
+      <img className="avatarContainer" src={Avatar} alt="picture placeholder"/>
       Name
       Badges
       Bio
-    </div>
+    </Grid>
+    </>
+    
   )
 }
 
