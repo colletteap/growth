@@ -4,8 +4,9 @@ import '../styles/Modal.css';
 import Grid from "@mui/joy/Grid";
 
 function ModalLoginForm({ isOpen, onClose }) {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState('');
   const navigate = useNavigate();
 
   if (!isOpen) return null;
@@ -25,13 +26,15 @@ function ModalLoginForm({ isOpen, onClose }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (response.ok) {
       
         const data = await response.json();
         console.log('Login successful:', data);
+
+        setUserName(data.name);
 
         // Redirect to Profile page
         navigate('/profile');
@@ -54,15 +57,15 @@ function ModalLoginForm({ isOpen, onClose }) {
 
         <Grid className="container">
           <h2>Login to Growth</h2>
-          <label htmlFor="uname"><b>Username</b></label>
-          <input
-            type="text"
-            placeholder="Enter Username"
-            name="uname"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+          <label htmlFor="email"><b>Email</b></label>
+            <input
+              type="text"
+              placeholder="Enter Email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
           <label htmlFor="psw"><b>Password</b></label>
           <input
