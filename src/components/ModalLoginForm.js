@@ -20,7 +20,7 @@ function ModalLoginForm({ isOpen, onClose }) {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
+      const response = await fetch('http://localhost:4001/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ function ModalLoginForm({ isOpen, onClose }) {
             placeholder="Enter Username"
             name="uname"
             value={username}
-            onChange={() => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
 
@@ -70,7 +70,7 @@ function ModalLoginForm({ isOpen, onClose }) {
             placeholder="Enter Password"
             name="psw"
             value={password}
-            onChange={() => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
 
