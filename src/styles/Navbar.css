@@ -75,9 +75,38 @@
   }
 
 
-
   .hiddenLinks {
     display: none;
   }
 
-
+  .profileDropdown {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .profileIcon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  
+  .dropdownMenu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #233349;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdownMenu a {
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .dropdownMenu a:hover {
+    background-color: #1a2740;
+  }
