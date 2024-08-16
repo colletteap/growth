@@ -11,15 +11,3 @@
     justify-content: center;
   }
 
-  .topCornerLink {
-    display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  width: 100%;
-  }
-
-  .dropdown {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }

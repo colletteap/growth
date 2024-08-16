@@ -13,11 +13,6 @@ function Profile() {
     <Grid className="ProfileContainer">
       <h2>Profile</h2>
       <img className="avatarContainer" src={Avatar} alt="picture placeholder"/>
-      <Grid className="topCornerLink">
-        <Grid className="dropdown">
-        
-        </Grid>
-      </Grid>
       <Grid>
       <h3>Welcome, {name}!</h3>
         </Grid>
