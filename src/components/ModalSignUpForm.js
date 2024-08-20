@@ -4,7 +4,7 @@ import '../styles/Modal.css';
 import Grid from "@mui/joy/Grid";
 
 function ModalSignUpForm({ isOpen, onClose }) {
-  const [name, setName] = useState('');
+  const [firstName, setName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +27,7 @@ function ModalSignUpForm({ isOpen, onClose }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, username, email, password }),
+        body: JSON.stringify({ firstName, username, email, password }),
       });
 
       if (response.ok) {
@@ -63,7 +63,7 @@ function ModalSignUpForm({ isOpen, onClose }) {
               type="text"
               placeholder="Enter Name"
               name="name"
-              value={name}
+              value={firstName}
               onChange={(e) => setName(e.target.value)}
               required
             />

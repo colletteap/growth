@@ -4,7 +4,7 @@ import "../styles/Profile.css";
 import Avatar from "../assets/avatarplaceholder.png";
 import { useLocation } from 'react-router-dom';
 
-function Profile() {
+function Profile({ data }) {
   const location = useLocation();
   const { name } = location.state || {}; 
 
@@ -27,7 +27,21 @@ function Profile() {
     setIsEditing(!isEditing);
   };
 
+const updateUserProfile = async (model) => {
+  const updatedUser = {
+    ...data,
+    ...model,
+  };
+  const userId = data.userId;
 
+  await fetch(`http://localhost:4001/updateUser/${userId}`, {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body:JSON.stringify({ updatedUser }),
+  });
+};
   const handleSave = async () => {
     try {
       const response = await fetch('http://localhost:4001/profile', {
