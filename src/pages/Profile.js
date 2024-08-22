@@ -98,7 +98,7 @@ const updateUserProfile = async (model) => {
               onChange={handleChange}
             />
           </Grid>
-          <button onClick={handleSave}>Save</button>
+          <button className="profileButtons" onClick={handleSave}>Save</button>
         </>
       ) : (
         <>
@@ -108,7 +108,7 @@ const updateUserProfile = async (model) => {
           <Grid>
             <p>{profileData.bio || 'A little about yourself'}</p>
           </Grid>
-          <button onClick={toggleEdit}>Edit</button>
+          <button className="profileButtons" onClick={toggleEdit}>Edit</button>
         </>
       )}
 
