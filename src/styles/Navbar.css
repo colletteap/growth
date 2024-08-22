@@ -97,7 +97,8 @@
     background-color: #233349;
     border-radius: 5px;
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
+    justify-self: center;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   }
   
@@ -109,4 +110,15 @@
   
   .dropdownMenu a:hover {
     background-color: #1a2740;
+  }
+
+  .dropdownMenu button {
+    padding: 10px 20px;
+    color: white;
+    font-size: 20px;
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    justify-content: center;
+    text-decoration: none;
+    margin: 20px;
   }

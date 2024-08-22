@@ -59,7 +59,6 @@ function Navbar() {
             {dropdownOpen && (
               <Grid className="dropdownMenu">
                 <Link to="./Profile">Profile</Link>
-                Edit Profile
                 <LogoutButton/>
               </Grid>
             )}
