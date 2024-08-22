@@ -7,6 +7,7 @@ import "../styles/Navbar.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import SoundToggleButton from "../soundReact/GlobalButton";
 import Avatar from "../assets/avatarplaceholder.png";
+import LogoutButton from "./Logout";
 
 function Navbar() {
   const matches = useMediaQuery("(min-width:767px)");
@@ -59,7 +60,7 @@ function Navbar() {
               <Grid className="dropdownMenu">
                 <Link to="./Profile">Profile</Link>
                 Edit Profile
-                Log Out
+                <LogoutButton/>
               </Grid>
             )}
 
