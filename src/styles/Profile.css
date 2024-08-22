@@ -11,3 +11,16 @@
     justify-content: center;
   }
 
+  button {
+    padding: 10px 20px;
+    color: white;
+    font-size: 20px;
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    justify-content: center;
+    text-decoration: none;
+    margin: 20px;
+    width: 10%;
+    background-color: darkgoldenrod;
+    border-radius: 10px;;
+  }
