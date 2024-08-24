@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Profile from './Profile';
+import Profile from '../pages/Profile';
 
 function ParentComponent() {
   const [userData, setUserData] = useState(null);
@@ -8,10 +8,18 @@ function ParentComponent() {
     
     const fetchUserData = async () => {
       try {
+
+        const accessToken = localStorage.getItem('accessToken');
+
+        if (!accessToken) {
+            console.error('No access token found');
+            return;
+          }
+
         const response = await fetch('http://localhost:4001/getUserData', {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${yourAuthToken}`, // Replace with actual token
+            'Authorization': `Bearer ${accessToken}`, // Replace with actual token
           },
         });
 

@@ -4,7 +4,7 @@ import '../styles/Modal.css';
 import Grid from "@mui/joy/Grid";
 
 function ModalSignUpForm({ isOpen, onClose }) {
-  const [firstName, setName] = useState('');
+  const [firstName, setfirstName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,11 +33,9 @@ function ModalSignUpForm({ isOpen, onClose }) {
       if (response.ok) {
         const data = await response.json();
         console.log('Registration successful:', data);
-        const userId = data.id;
-        setUsername(data.name);
 
         // Redirect to Profile page or login after signup
-        navigate(`/profile/${userId}`);
+        navigate(`/profile/${data.userId}`);
       } else {
         const errorData = await response.json();
         console.error('Registration failed', errorData.error);
@@ -66,7 +64,7 @@ function ModalSignUpForm({ isOpen, onClose }) {
               placeholder="Enter Name"
               name="name"
               value={firstName}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setfirstName(e.target.value)}
               required
             />
 
