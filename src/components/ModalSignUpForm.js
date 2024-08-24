@@ -33,9 +33,11 @@ function ModalSignUpForm({ isOpen, onClose }) {
       if (response.ok) {
         const data = await response.json();
         console.log('Registration successful:', data);
+        const userId = data.id;
+        setUsername(data.name);
 
         // Redirect to Profile page or login after signup
-        navigate('/profile');
+        navigate(`/profile/${userId}`);
       } else {
         const errorData = await response.json();
         console.error('Registration failed', errorData.error);

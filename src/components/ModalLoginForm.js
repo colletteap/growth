@@ -33,11 +33,17 @@ function ModalLoginForm({ isOpen, onClose }) {
       
         const data = await response.json();
         console.log('Login successful:', data);
+        data = {
+          id: 1,
+          name: "John Doe",
+          password: "password",
+        }
 
+        const userId = data.id
         setUserName(data.name);
 
         // Redirect to Profile page
-        navigate('/profile');
+        navigate(`/profile/${data}`);
       } else {
         const errorData = await response.json();
         console.error('Login failed', errorData.error);

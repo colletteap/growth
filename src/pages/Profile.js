@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import { Grid } from '@mui/joy';
 import "../styles/Profile.css";
 import Avatar from "../assets/avatarplaceholder.png";
-import { useLocation } from 'react-router-dom';
 
 function Profile({ data }) {
-  const location = useLocation();
-  const { name } = location.state || {}; 
 
   const [isEditing, setIsEditing] = useState(false);
 
@@ -27,10 +24,11 @@ function Profile({ data }) {
     setIsEditing(!isEditing);
   };
 
-const updateUserProfile = async (model) => {
+const updateUserProfile = async () => {
   const updatedUser = {
     ...data,
-    ...model,
+    title: profileData.title,
+    bio: profileData.bio,
   };
   const userId = data.userId;
 
@@ -42,38 +40,23 @@ const updateUserProfile = async (model) => {
     body:JSON.stringify({ updatedUser }),
   });
 };
-  const handleSave = async () => {
-    try {
-      const response = await fetch('http://localhost:4001/profile', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          title: profileData.title,
-          bio: profileData.bio,
-         // add other fields here as added
-        }),
-      });
+const handleSave = async () => {
+  try {
+    await updateUserProfile(); 
+    alert("Profile updated successfully!");
+    toggleEdit();  // Switch back to view mode after saving
+  } catch (error) {
+    alert(`Error: ${error.message}`);
+  }
+};
 
-      const data = await response.json();
-      if (response.ok) {
-        alert(data.message); 
-        toggleEdit(); // Switch back to view mode after saving
-      } else {
-        alert(`Error: ${data.error}`);
-      }
-    } catch (error) {
-      alert(`Error: ${error.message}`);
-    }
-  };
 
   return (
     <Grid className="ProfileContainer">
       <h2>Profile</h2>
       <img className="avatarContainer" src={Avatar} alt="picture placeholder" />
       <Grid>
-        <h3>Welcome, {name}!</h3>
+        <h3>Welcome, {data?.firstName || 'Guest'}!</h3>
       </Grid>
 
       {isEditing ? (
