@@ -32,10 +32,13 @@ const updateUserProfile = async () => {
   };
   const userId = data.userId;
 
+  const accessToken = localStorage.getItem('accessToken');
+
   await fetch(`http://localhost:4001/updateUser/${userId}`, {
     method: "PATCH",
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
     },
     body:JSON.stringify({ updatedUser }),
   });

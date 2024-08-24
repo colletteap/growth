@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Modal.css';
 import Grid from "@mui/joy/Grid";
+import { LocalCafe } from '@mui/icons-material';
 
 function ModalLoginForm({ isOpen, onClose }) {
   const [email, setEmail] = useState('');
@@ -33,17 +34,14 @@ function ModalLoginForm({ isOpen, onClose }) {
       
         const data = await response.json();
         console.log('Login successful:', data);
-        data = {
-          id: 1,
-          name: "John Doe",
-          password: "password",
-        }
 
-        const userId = data.id
-        setUserName(data.name);
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('refreshToken', data.refreshToken);
+
+        setUserName(data.firstName);
 
         // Redirect to Profile page
-        navigate(`/profile/${data}`);
+        navigate(`/profile/${data.userId}`);
       } else {
         const errorData = await response.json();
         console.error('Login failed', errorData.error);
