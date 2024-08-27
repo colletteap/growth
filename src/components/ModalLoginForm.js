@@ -36,10 +36,12 @@ function ModalLoginForm({ isOpen, onClose }) {
         const data = await response.json();
         console.log('Login successful:', data);
 
-        dispatch(setTokens(data.accessToken, data.refreshToken));  
-
-        // Redirect to Profile page
-        navigate(`/profile/${data.userId}`);
+        if (data && data.userId) {
+          // dispatch(setTokens(data.accessToken, data.refreshToken));  
+          navigate(`/profile/${data.userId}`);
+        } else {
+          console.error('userId not found in response:', data);
+        }
       } else {
         const errorData = await response.json();
         console.error('Login failed', errorData.error);

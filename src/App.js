@@ -5,6 +5,7 @@ import Advice from "./pages/Advice";
 import Blog from "./pages/Blog";
 import GridLanding from "./components/Gridlanding";
 import ParentData from "./components/ParentData";
+import Profile from "./pages/Profile";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/Blog" element={<Blog />} />
           <Route path="/Profile" element={<ParentData/>}/>
           <Route path="*" element={<GridLanding />} />
+          <Route path="/profile/:userId" element={<Profile />} />
         </Routes>
         
       </Router>
