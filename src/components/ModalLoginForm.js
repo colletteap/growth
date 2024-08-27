@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux'; 
+import { setTokens } from '../redux/actions/tokenActions';
 import '../styles/Modal.css';
 import Grid from "@mui/joy/Grid";
 
@@ -7,6 +9,7 @@ function ModalLoginForm({ isOpen, onClose }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   if (!isOpen) return null;
 
@@ -33,10 +36,7 @@ function ModalLoginForm({ isOpen, onClose }) {
         const data = await response.json();
         console.log('Login successful:', data);
 
-        localStorage.setItem('accessToken', data.accessToken);
-        localStorage.setItem('refreshToken', data.refreshToken);
-
-  
+        dispatch(setTokens(data.accessToken, data.refreshToken));  
 
         // Redirect to Profile page
         navigate(`/profile/${data.userId}`);

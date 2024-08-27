@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Grid } from '@mui/joy';
+import { useSelector } from 'react-redux';
 import "../styles/Profile.css";
 import Avatar from "../assets/avatarplaceholder.png";
 
 function Profile({ data }) {
+  const accessToken = useSelector((state) => state.token.accessToken);
+
+  console.log('Access token:', accessToken);
 
   const [isEditing, setIsEditing] = useState(false);
 
