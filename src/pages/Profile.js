@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux';
 import "../styles/Profile.css";
 import Avatar from "../assets/avatarplaceholder.png";
 
-function Profile({ data }) {
+function Profile() {
   const accessToken = useSelector((state) => state.token.accessToken);
   const userId = useSelector((state) => state.user.userId);
-  const firstName = useSelector((state) => state.user.name);
+
   console.log('Access token:', accessToken);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -15,6 +15,10 @@ function Profile({ data }) {
     firstName: '',
     title: '',
     bio: '',
+    yearsExperience: '',
+    education: '',
+    contactInfo: '',
+    favBooks: '',
   });
 
   // Fetch and populate profile data on component mount
@@ -36,6 +40,10 @@ function Profile({ data }) {
           firstName: data.firstName || '',
           title: data.title || '',
           bio: data.bio || '',
+          yearsExperience: data.yearsExperience || '',
+          education: data.education || '',
+          contactInfo: data.contactInfo || '',
+          favBooks: data.favBooks || '',
         });
       } catch (error) {
         console.error('Error fetching profile data:', error);
@@ -63,6 +71,10 @@ const updateUserProfile = async () => {
   const updatedUser = {
     title: profileData.title,
     bio: profileData.bio,
+    yearsExperience: profileData.yearsExperience,
+    education: profileData.education,
+    contactInfo: profileData.contactInfo,
+    favBooks: profileData.favBooks,
   };
 
   
@@ -117,6 +129,42 @@ const handleSave = async () => {
               onChange={handleChange}
             />
           </Grid>
+          <Grid>
+            <input
+              type="text"
+              placeholder="How many years of teaching experience do you have?"
+              name="yearsExperience"
+              value={profileData.yearsExperience}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid>
+            <input
+              type="text"
+              placeholder="Your education &/or certificates"
+              name="education"
+              value={profileData.education}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid>
+            <input
+              type="text"
+              placeholder="Your contact information"
+              name="contactInfo"
+              value={profileData.contactInfo}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid>
+            <input
+              type="text"
+              placeholder="Your favorite resources or books"
+              name="favBooks"
+              value={profileData.favBooks}
+              onChange={handleChange}
+            />
+          </Grid>
           <button className="profileButtons" onClick={handleSave}>Save</button>
         </>
       ) : (
@@ -127,18 +175,26 @@ const handleSave = async () => {
           <Grid>
             <p>{profileData.bio || 'A little about yourself'}</p>
           </Grid>
+          <Grid>
+            <p>{profileData.yearsExperience || 'Years of teaching experience'}</p>
+          </Grid>
+          <Grid>
+            <p>{profileData.education || 'Your education and/or certificates'}</p>
+          </Grid>
+          <Grid>
+            <p>{profileData.contactInfo || 'Your contact information'}</p>
+          </Grid>
+          <Grid>
+            <p>{profileData.favBooks || 'Your favorite resources or books'}</p>
+          </Grid>
           <button className="profileButtons" onClick={toggleEdit}>Edit</button>
         </>
       )}
 
       <Grid>
-        <p>Teaching Experience |</p>
-        <p>Education / Certificates |</p>
         <p>Resources Shared |</p>
         <p>Badges |</p>
         <p>Skills |</p>
-        <p>Contact Info |</p>
-        <p>Favorite Resources / Books</p>
       </Grid>
     </Grid>
   );

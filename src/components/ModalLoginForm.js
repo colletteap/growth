@@ -36,8 +36,9 @@ function ModalLoginForm({ isOpen, onClose }) {
         const data = await response.json();
         console.log('Login successful:', data);
 
-        if (data && data.userId) {
-          // dispatch(setTokens(data.accessToken, data.refreshToken));  
+        if (data && data.userId && data.accessToken && data.refreshToken) {
+          dispatch(setTokens(data.accessToken, data.refreshToken));
+          console.log('Tokens set:', data.accessToken, data.refreshToken);  
           navigate(`/profile/${data.userId}`);
         } else {
           console.error('userId not found in response:', data);
