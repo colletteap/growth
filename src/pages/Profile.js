@@ -7,7 +7,7 @@ import Avatar from "../assets/avatarplaceholder.png";
 function Profile() {
   const accessToken = useSelector((state) => state.token.accessToken);
   const userId = useSelector((state) => state.user.userId);
-
+console.log('user id found', userId);
   console.log('Access token:', accessToken);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -21,7 +21,7 @@ function Profile() {
     favBooks: '',
   });
 
-  // Fetch and populate profile data on component mount
+  // Fetch and populate profile data
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -35,6 +35,7 @@ function Profile() {
         });
         
         const data = await response.json();
+        console.log('Fetched data:', data);
         // Populate the state with user data
         setProfileData({
           firstName: data.firstName || '',
@@ -170,7 +171,7 @@ const handleSave = async () => {
       ) : (
         <>
           <Grid>
-            <h3>{profileData.title || 'Your Title'}</h3>
+            <h3>{profileData.title || 'Visiting Teacher'}</h3>
           </Grid>
           <Grid>
             <p>{profileData.bio || 'A little about yourself'}</p>

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setTokens } from '../redux/actions/tokenActions';
 import '../styles/Modal.css';
 import Grid from "@mui/joy/Grid";
+import { setUser } from '../redux/actions/userActions';
 
 function ModalLoginForm({ isOpen, onClose }) {
   const [email, setEmail] = useState('');
@@ -38,6 +39,13 @@ function ModalLoginForm({ isOpen, onClose }) {
 
         if (data && data.userId && data.accessToken && data.refreshToken) {
           dispatch(setTokens(data.accessToken, data.refreshToken));
+          
+        const user = { 
+        email: data.email,
+        firstName: data.firstName,
+        userId: data.userId,
+        }
+          dispatch(setUser(user));
           console.log('Tokens set:', data.accessToken, data.refreshToken);  
           navigate(`/profile/${data.userId}`);
         } else {
