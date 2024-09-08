@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux'; 
-import { setTokens } from '../redux/actions/tokenActions';
 import '../styles/Modal.css';
 import Grid from "@mui/joy/Grid";
-import { setUser } from '../redux/actions/userActions';
 
 function ModalLoginForm({ isOpen, onClose }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   if (!isOpen) return null;
 
@@ -33,23 +29,22 @@ function ModalLoginForm({ isOpen, onClose }) {
       });
 
       if (response.ok) {
-      
         const data = await response.json();
         console.log('Login successful:', data);
 
+        // Check if necessary data is present
         if (data && data.userId && data.accessToken && data.refreshToken) {
-          dispatch(setTokens(data.accessToken, data.refreshToken));
-          
-        const user = { 
-        email: data.email,
-        firstName: data.firstName,
-        userId: data.userId,
-        }
-          dispatch(setUser(user));
-          console.log('Tokens set:', data.accessToken, data.refreshToken);  
+          // Store userId, accessToken, and refreshToken in localStorage
+          localStorage.setItem('userId', data.userId);
+          localStorage.setItem('accessToken', data.accessToken);
+          localStorage.setItem('refreshToken', data.refreshToken);
+
+          console.log('Tokens and userId stored:', data.accessToken, data.refreshToken, data.userId);
+
+          // Navigate to the user's profile page
           navigate(`/profile/${data.userId}`);
         } else {
-          console.error('userId not found in response:', data);
+          console.error('Required user data not found in response:', data);
         }
       } else {
         const errorData = await response.json();
@@ -71,14 +66,14 @@ function ModalLoginForm({ isOpen, onClose }) {
         <Grid className="container">
           <h2>Login to Growth</h2>
           <label htmlFor="email"><b>Email</b></label>
-            <input
-              type="text"
-              placeholder="Enter Email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+          <input
+            type="text"
+            placeholder="Enter Email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
           <label htmlFor="psw"><b>Password</b></label>
           <input

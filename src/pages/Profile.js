@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@mui/joy';
-import { useSelector } from 'react-redux';
 import "../styles/Profile.css";
 import Avatar from "../assets/avatarplaceholder.png";
 
 function Profile() {
-  const accessToken = useSelector((state) => state.token.accessToken);
-  const userId = useSelector((state) => state.user.userId);
-console.log('user id found', userId);
-  console.log('Access token:', accessToken);
-
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
     firstName: '',
@@ -23,38 +17,48 @@ console.log('user id found', userId);
 
   // Fetch and populate profile data
   useEffect(() => {
-    const fetchProfileData = async () => {
-      try {
-    
-        const response = await fetch('http://localhost:4001/profile', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-        });
-        
-        const data = await response.json();
-        console.log('Fetched data:', data);
-        // Populate the state with user data
-        setProfileData({
-          firstName: data.firstName || '',
-          title: data.title || '',
-          bio: data.bio || '',
-          yearsExperience: data.yearsExperience || '',
-          education: data.education || '',
-          contactInfo: data.contactInfo || '',
-          favBooks: data.favBooks || '',
-        });
-      } catch (error) {
-        console.error('Error fetching profile data:', error);
-      }
-    };
+    const userId = localStorage.getItem('userId'); // Get userId from localStorage
 
-    if (userId) { 
-      fetchProfileData();
+    if (userId) {
+      const fetchProfileData = async () => {
+        const accessToken = localStorage.getItem('accessToken'); // Get accessToken from localStorage
+
+        try {
+          const response = await fetch(`http://localhost:4001/profile`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            console.log('Fetched data:', data);
+
+            // Populate the state with user data
+            setProfileData({
+              firstName: data.firstName || '',
+              title: data.title || '',
+              bio: data.bio || '',
+              yearsExperience: data.yearsExperience || '',
+              education: data.education || '',
+              contactInfo: data.contactInfo || '',
+              favBooks: data.favBooks || '',
+            });
+          } else {
+            console.error('Failed to fetch profile data');
+          }
+        } catch (error) {
+          console.error('Error fetching profile data:', error);
+        }
+      };
+
+      fetchProfileData();  // Fetch profile data if userId is available
+    } else {
+      console.error('User ID not found in localStorage');
     }
-  }, [userId, accessToken]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,37 +72,39 @@ console.log('user id found', userId);
     setIsEditing(!isEditing);
   };
 
-const updateUserProfile = async () => {
-  const updatedUser = {
-    title: profileData.title,
-    bio: profileData.bio,
-    yearsExperience: profileData.yearsExperience,
-    education: profileData.education,
-    contactInfo: profileData.contactInfo,
-    favBooks: profileData.favBooks,
+  const handleSave = async () => {
+    const accessToken = localStorage.getItem('accessToken'); // Get accessToken from localStorage
+
+    const updatedUser = {
+      title: profileData.title,
+      bio: profileData.bio,
+      yearsExperience: profileData.yearsExperience,
+      education: profileData.education,
+      contactInfo: profileData.contactInfo,
+      favBooks: profileData.favBooks,
+    };
+
+    try {
+      const response = await fetch(`http://localhost:4001/profile`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(updatedUser),
+      });
+
+      if (response.ok) {
+        console.log('Profile updated successfully');
+        toggleEdit();  // Switch back to view mode after saving
+        alert("Profile updated successfully!");
+      } else {
+        console.error('Failed to update profile');
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
   };
-
-  
-  await fetch(`http://localhost:4001/profile`, {
-    method: "PUT",
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`,
-    },
-    body:JSON.stringify(updatedUser),
-  });
-};
-
-const handleSave = async () => {
-  try {
-    await updateUserProfile(); 
-    alert("Profile updated successfully!!!!");
-    toggleEdit();  // Switch back to view mode after saving
-  } catch (error) {
-    alert(`Error: ${error.message}`);
-  }
-};
-
 
   return (
     <Grid className="ProfileContainer">
@@ -191,14 +197,8 @@ const handleSave = async () => {
           <button className="profileButtons" onClick={toggleEdit}>Edit</button>
         </>
       )}
-
-      <Grid>
-        <p>Resources Shared |</p>
-        <p>Badges |</p>
-        <p>Skills |</p>
-      </Grid>
     </Grid>
   );
 }
 
-export default Profile
+export default Profile;
