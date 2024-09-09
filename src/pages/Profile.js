@@ -128,6 +128,7 @@ function Profile() {
             </h3>
           </Grid>
           <Grid>
+            <h3> Bio</h3>
             <input
               type="text"
               placeholder="Tell a little about yourself"
@@ -137,6 +138,7 @@ function Profile() {
             />
           </Grid>
           <Grid>
+            <h3>Years of Experience</h3>
             <input
               type="text"
               placeholder="How many years of teaching experience do you have?"
@@ -146,6 +148,7 @@ function Profile() {
             />
           </Grid>
           <Grid>
+            <h3>Education</h3>
             <input
               type="text"
               placeholder="Your education &/or certificates"
@@ -155,6 +158,7 @@ function Profile() {
             />
           </Grid>
           <Grid>
+            <h3>Contact</h3>
             <input
               type="text"
               placeholder="Your contact information"
@@ -164,6 +168,7 @@ function Profile() {
             />
           </Grid>
           <Grid>
+            <h3> Favorite Resources</h3>
             <input
               type="text"
               placeholder="Your favorite resources or books"
