@@ -17,10 +17,10 @@ export default function SkillShellDropDown({ onChange }) {
       id="dropdown"
       options={skillShellData}
       getOptionLabel={(option) => option.skill}
-      sx={{ width: 300, backgroundColor: "#fff", borderRadius: "15px" }}
+      sx={{ width: 300, backgroundColor: "#fff", borderRadius: "10px" }}
       onChange={handleSkillChange}
       renderInput={(params) => (
-        <TextField {...params} label="Choose a skill..." />
+        <TextField {...params} />
       )}
     />
   );
