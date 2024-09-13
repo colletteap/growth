@@ -5,7 +5,7 @@ import Advice from "./pages/Advice";
 import Blog from "./pages/Blog";
 import GridLanding from "./components/Gridlanding";
 import Profile from "./pages/Profile";
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (

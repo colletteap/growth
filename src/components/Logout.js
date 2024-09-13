@@ -8,9 +8,9 @@ const handleLogout = async (event) => {
     event.preventDefault();
   
     try {
-      const token = localStorage.getItem('token'); 
+      const token = localStorage.getItem('accessToken'); 
   
-      const response = await fetch('http://localhost:4001/logout', {
+      const response = await fetch('http://localhost:3001/logout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -22,7 +22,9 @@ const handleLogout = async (event) => {
         const data = await response.json();
         console.log('Logout successful:', data);
   
-        localStorage.removeItem('token');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('userId');
   
         navigate('/login');
       } else {
