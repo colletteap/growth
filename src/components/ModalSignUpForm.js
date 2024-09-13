@@ -22,7 +22,7 @@ function ModalSignUpForm({ isOpen, onClose }) {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:4001/register', {
+      const response = await fetch('http://localhost:3000/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -24,7 +24,7 @@ function Profile() {
         const accessToken = localStorage.getItem('accessToken'); // Get accessToken from localStorage
 
         try {
-          const response = await fetch(`http://localhost:4001/profile`, {
+          const response = await fetch(`http://localhost:3000/profile`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${accessToken}`,
@@ -85,7 +85,7 @@ function Profile() {
     };
 
     try {
-      const response = await fetch(`http://localhost:4001/profile`, {
+      const response = await fetch(`http://localhost:3000/profile`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
