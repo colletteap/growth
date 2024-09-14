@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@mui/joy';
+import { styled } from '@mui/joy';
 import "../styles/Profile.css";
 import Avatar from "../assets/avatarplaceholder.png";
 
@@ -107,103 +108,104 @@ function Profile() {
   };
 
   return (
-    <Grid className="ProfileContainer">
-      <h2>Profile</h2>
-      <img className="avatarContainer" src={Avatar} alt="picture placeholder" />
-      <Grid>
-        <h3>Welcome, {profileData.firstName || 'Guest'}!</h3>
-      </Grid>
+    <div className='ProfileContainer'>
+      {/* First Column */}
+      <div className='gridItem'>
+        <div>
+          <div >
+            <h2>Profile</h2>
+            <img className="avatarContainer" src={Avatar} alt="picture placeholder" />
+            {isEditing ? (
+              <>
+                <input
+                  type="text"
+                  placeholder="Enter Title"
+                  name="title"
+                  value={profileData.title}
+                  onChange={handleChange}
+                />
+              </>
+            ) : (
+              <>
+                <h3>{profileData.title || 'Visiting Teacher'}</h3>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
 
-      {isEditing ? (
-        <>
-          <Grid>
-            <h3>
-              <input
-                type="text"
-                placeholder="Enter Title"
-                name="title"
-                value={profileData.title}
-                onChange={handleChange}
-              />
-            </h3>
-          </Grid>
-          <Grid>
-            <h3> Bio</h3>
-            <input
-              type="text"
-              placeholder="Tell a little about yourself"
-              name="bio"
-              value={profileData.bio}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid>
-            <h3>Years of Experience</h3>
-            <input
-              type="text"
-              placeholder="How many years of teaching experience do you have?"
-              name="yearsExperience"
-              value={profileData.yearsExperience}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid>
-            <h3>Education</h3>
-            <input
-              type="text"
-              placeholder="Your education &/or certificates"
-              name="education"
-              value={profileData.education}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid>
-            <h3>Contact</h3>
-            <input
-              type="text"
-              placeholder="Your contact information"
-              name="contactInfo"
-              value={profileData.contactInfo}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid>
-            <h3> Favorite Resources</h3>
-            <input
-              type="text"
-              placeholder="Your favorite resources or books"
-              name="favBooks"
-              value={profileData.favBooks}
-              onChange={handleChange}
-            />
-          </Grid>
-          <button className="profileButtons" onClick={handleSave}>Save</button>
-        </>
-      ) : (
-        <>
-          <Grid>
-            <h3>{profileData.title || 'Visiting Teacher'}</h3>
-          </Grid>
-          <Grid>
-            <p>{profileData.bio || 'A little about yourself'}</p>
-          </Grid>
-          <Grid>
-            <p>{profileData.yearsExperience || 'Years of teaching experience'}</p>
-          </Grid>
-          <Grid>
-            <p>{profileData.education || 'Your education and/or certificates'}</p>
-          </Grid>
-          <Grid>
-            <p>{profileData.contactInfo || 'Your contact information'}</p>
-          </Grid>
-          <Grid>
-            <p>{profileData.favBooks || 'Your favorite resources or books'}</p>
-          </Grid>
-          <button className="profileButtons" onClick={toggleEdit}>Edit</button>
-        </>
-      )}
-    </Grid>
+      {/* Second Column */}
+      <div className='gridItem'>
+        <div >
+          <div >
+            {isEditing ? (
+              <>
+                <input
+                  type="text"
+                  placeholder="Tell a little about yourself"
+                  name="bio"
+                  value={profileData.bio}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  placeholder="How many years of teaching experience do you have?"
+                  name="yearsExperience"
+                  value={profileData.yearsExperience}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  placeholder="Your education &/or certificates"
+                  name="education"
+                  value={profileData.education}
+                  onChange={handleChange}
+                />
+              </>
+            ) : (
+              <>
+                <p>{profileData.bio || 'A little about yourself'}</p>
+                <p>{profileData.yearsExperience || 'Years of teaching experience'}</p>
+                <p>{profileData.education || 'Your education and/or certificates'}</p>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Third Column */}
+      <div className='gridItem'>
+        <div >
+          <div >
+            {isEditing ? (
+              <>
+                <input
+                  type="text"
+                  placeholder="Your contact information"
+                  name="contactInfo"
+                  value={profileData.contactInfo}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  placeholder="Your favorite resources or books"
+                  name="favBooks"
+                  value={profileData.favBooks}
+                  onChange={handleChange}
+                />
+                <button className="profileButtons" onClick={handleSave}>Save</button>
+              </>
+            ) : (
+              <>
+                <p>{profileData.contactInfo || 'Your contact information'}</p>
+                <p>{profileData.favBooks || 'Your favorite resources or books'}</p>
+                <button className="profileButtons" onClick={toggleEdit}>Edit</button>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
-
 export default Profile;
