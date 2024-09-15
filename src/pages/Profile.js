@@ -112,11 +112,12 @@ function Profile() {
       {/* First Column */}
       <div className='gridItem'>
         <div>
-          <div >
+          <div className='spaced'>
             <h2>Profile</h2>
             <img className="avatarContainer" src={Avatar} alt="picture placeholder" />
+            </div>
             {isEditing ? (
-              <>
+              <div>
                 <input
                   type="text"
                   placeholder="Enter Title"
@@ -124,22 +125,22 @@ function Profile() {
                   value={profileData.title}
                   onChange={handleChange}
                 />
-              </>
+              </div>
             ) : (
-              <>
+              <div className='spaced'>
                 <h3>{profileData.title || 'Visiting Teacher'}</h3>
-              </>
+              </div>
             )}
           </div>
-        </div>
       </div>
 
       {/* Second Column */}
       <div className='gridItem'>
-        <div >
-          <div >
+        <div className='editFields'>
+          
             {isEditing ? (
-              <>
+              <div>
+                <div >
                 <input
                   type="text"
                   placeholder="Tell a little about yourself"
@@ -147,6 +148,8 @@ function Profile() {
                   value={profileData.bio}
                   onChange={handleChange}
                 />
+                </div>
+                <div >
                 <input
                   type="text"
                   placeholder="How many years of teaching experience do you have?"
@@ -154,6 +157,8 @@ function Profile() {
                   value={profileData.yearsExperience}
                   onChange={handleChange}
                 />
+                </div>
+                <div >
                 <input
                   type="text"
                   placeholder="Your education &/or certificates"
@@ -161,24 +166,31 @@ function Profile() {
                   value={profileData.education}
                   onChange={handleChange}
                 />
-              </>
+              </div>
+              </div>
             ) : (
-              <>
+              <div>
+                <div className='spaced'>
                 <p>{profileData.bio || 'A little about yourself'}</p>
+                </div>
+                <div className='spaced'>
                 <p>{profileData.yearsExperience || 'Years of teaching experience'}</p>
+                </div>
+                <div className='spaced'>
                 <p>{profileData.education || 'Your education and/or certificates'}</p>
-              </>
+                </div>
+              </div>
             )}
           </div>
-        </div>
+        
       </div>
 
       {/* Third Column */}
       <div className='gridItem'>
-        <div >
-          <div >
+          <div className='editFields'>
             {isEditing ? (
-              <>
+              <div>
+                <div>
                 <input
                   type="text"
                   placeholder="Your contact information"
@@ -186,6 +198,8 @@ function Profile() {
                   value={profileData.contactInfo}
                   onChange={handleChange}
                 />
+                </div>
+                <div>
                 <input
                   type="text"
                   placeholder="Your favorite resources or books"
@@ -193,19 +207,23 @@ function Profile() {
                   value={profileData.favBooks}
                   onChange={handleChange}
                 />
+                </div>
                 <button className="profileButtons" onClick={handleSave}>Save</button>
-              </>
+              </div>
             ) : (
-              <>
+              <div>
+                <div className='spaced'>
                 <p>{profileData.contactInfo || 'Your contact information'}</p>
+                </div>
+                <div className='spaced'>
                 <p>{profileData.favBooks || 'Your favorite resources or books'}</p>
                 <button className="profileButtons" onClick={toggleEdit}>Edit</button>
-              </>
+                </div>
+              </div>
             )}
           </div>
         </div>
       </div>
-    </div>
   );
 }
 export default Profile;
