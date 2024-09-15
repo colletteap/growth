@@ -117,13 +117,14 @@ function Profile() {
             <img className="avatarContainer" src={Avatar} alt="picture placeholder" />
             </div>
             {isEditing ? (
-              <div>
+              <div className='spaced'>
                 <input
                   type="text"
                   placeholder="Enter Title"
                   name="title"
                   value={profileData.title}
                   onChange={handleChange}
+                  style={{ fontFamily: 'Quicksand, sans-serif', fontSize: '16px', border: 'none', backgroundColor: 'blanchedalmond'}}
                 />
               </div>
             ) : (
@@ -140,31 +141,34 @@ function Profile() {
           
             {isEditing ? (
               <div>
-                <div >
+                <div className='spaced'>
                 <input
                   type="text"
                   placeholder="Tell a little about yourself"
                   name="bio"
                   value={profileData.bio}
                   onChange={handleChange}
+                  style={{ fontFamily: 'Quicksand, sans-serif', fontSize: '16px', border: 'none', backgroundColor: 'blanchedalmond'}}
                 />
                 </div>
-                <div >
+                <div className='spaced'>
                 <input
                   type="text"
                   placeholder="How many years of teaching experience do you have?"
                   name="yearsExperience"
                   value={profileData.yearsExperience}
                   onChange={handleChange}
+                  style={{ fontFamily: 'Quicksand, sans-serif', fontSize: '16px', border: 'none', backgroundColor: 'blanchedalmond'}}
                 />
                 </div>
-                <div >
+                <div className='spaced'>
                 <input
                   type="text"
                   placeholder="Your education &/or certificates"
                   name="education"
                   value={profileData.education}
                   onChange={handleChange}
+                  style={{ fontFamily: 'Quicksand, sans-serif', fontSize: '16px', border: 'none', backgroundColor: 'blanchedalmond'}}
                 />
               </div>
               </div>
@@ -190,25 +194,27 @@ function Profile() {
           <div className='editFields'>
             {isEditing ? (
               <div>
-                <div>
+                <div className='spaced'>
                 <input
                   type="text"
                   placeholder="Your contact information"
                   name="contactInfo"
                   value={profileData.contactInfo}
                   onChange={handleChange}
+                  style={{ fontFamily: 'Quicksand, sans-serif', fontSize: '16px', border: 'none', backgroundColor: 'blanchedalmond'}}
                 />
                 </div>
-                <div>
+                <div className='spaced'>
                 <input
                   type="text"
                   placeholder="Your favorite resources or books"
                   name="favBooks"
                   value={profileData.favBooks}
                   onChange={handleChange}
+                  style={{ fontFamily: 'Quicksand, sans-serif', fontSize: '16px', border: 'none', backgroundColor: 'blanchedalmond'}}
                 />
-                </div>
                 <button className="profileButtons" onClick={handleSave}>Save</button>
+                </div>
               </div>
             ) : (
               <div>
