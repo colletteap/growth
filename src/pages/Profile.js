@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Grid } from '@mui/joy';
-import { styled } from '@mui/joy';
 import "../styles/Profile.css";
 import Avatar from "../assets/avatarplaceholder.png";
 
