@@ -5,6 +5,7 @@ import Avatar from "../assets/avatarplaceholder.png";
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
+    profilePicture: Avatar,
     firstName: '',
     title: '',
     bio: '',
@@ -37,6 +38,7 @@ function Profile() {
 
             // Populate the state with user data
             setProfileData({
+              profilePicture: data.profilePicture || Avatar, 
               firstName: data.firstName || '',
               title: data.title || '',
               bio: data.bio || '',
@@ -67,6 +69,13 @@ function Profile() {
     });
   };
 
+  const handleFileChange = (e) => {
+    setProfileData({
+      ...profileData,
+      profilePicture: e.target.files[0],
+    });
+  };
+
   const toggleEdit = () => {
     setIsEditing(!isEditing);
   };
@@ -74,28 +83,29 @@ function Profile() {
   const handleSave = async () => {
     const accessToken = localStorage.getItem('accessToken'); // Get accessToken from localStorage
 
-    const updatedUser = {
-      title: profileData.title,
-      bio: profileData.bio,
-      yearsExperience: profileData.yearsExperience,
-      education: profileData.education,
-      contactInfo: profileData.contactInfo,
-      favBooks: profileData.favBooks,
-    };
+    const formData = new FormData();
+    formData.append('title', profileData.title);
+    formData.append('bio', profileData.bio);
+    formData.append('yearsExperience', profileData.yearsExperience);
+    formData.append('education', profileData.education);
+    formData.append('contactInfo', profileData.contactInfo);
+    formData.append('favBooks', profileData.favBooks);
+    if (profileData.profilePicture) {
+      formData.append('profilePicture', profileData.profilePicture);
+    }
 
     try {
       const response = await fetch(`http://localhost:3001/profile`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${accessToken}`,
         },
-        body: JSON.stringify(updatedUser),
+        body: formData,
       });
 
       if (response.ok) {
         console.log('Profile updated successfully');
-        toggleEdit();  // Switch back to view mode after saving
+        toggleEdit();  
         alert("Profile updated successfully!");
       } else {
         console.error('Failed to update profile');
@@ -112,8 +122,16 @@ function Profile() {
         <div>
           <div className='spaced'>
             <h2>Profile</h2>
-            <img className="avatarContainer" src={Avatar} alt="picture placeholder" />
-            </div>
+            <img className="avatarContainer" src={profileData.profilePicture || Avatar} alt="profile" />
+            {isEditing && (
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                style={{ margin: '10px 0' }}
+              />
+            )}
+          </div>
             {isEditing ? (
               <div className='spaced'>
                 <input
