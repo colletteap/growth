@@ -85,14 +85,14 @@ function ModalLoginForm({ isOpen, onClose }) {
             required
           />
 
-          <button type="submit">Login</button>
+          <button className='mbutton' type="submit">Login</button>
           <label>
             <input type="checkbox" defaultChecked name="remember" /> Remember me
           </label>
         </Grid>
 
         <Grid className="container" style={{ backgroundColor: '#f1f1f1' }}>
-          <button type="button" onClick={onClose} className="cancelbtn">Cancel</button>
+          <button type="button" onClick={onClose} className="mbutton cancelbtn">Cancel</button>
           <span className="psw">Forgot <p>password?</p></span>
         </Grid>
       </form>

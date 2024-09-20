@@ -9,7 +9,7 @@
   }
   
   /* Set a style for all buttons */
-  button {
+  .mbutton {
     background-color: navy;
     color: white;
     padding: 14px 20px;
