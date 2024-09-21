@@ -22,7 +22,7 @@ export default function SkillLandingDropDown() {
       sx={{ width: 300, backgroundColor: "#fff", borderRadius: "15px" }}
       onChange={handleSkillSelect}
       renderInput={(params) => (
-        <TextField {...params} label="Choose a skill..." />
+        <TextField {...params } />
       )}
     />
   );
