@@ -71,3 +71,10 @@
   width: auto;
   justify-items: center;
 }
+
+.centerContainerSU {
+  display: flex;
+flex-direction: row;
+  justify-items: center;
+ 
+}

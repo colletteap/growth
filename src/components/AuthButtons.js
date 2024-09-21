@@ -27,7 +27,7 @@ function AuthButtons() {
   return (
     <Grid style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
         gridGap: "10px",
         padding: "10px",
         justifyItems: "center",

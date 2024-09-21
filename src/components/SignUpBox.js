@@ -1,33 +1,18 @@
 import React from "react";
-import Grid from "@mui/joy/Grid";
+import "../styles/Gridlanding.css";
 import AuthButtons from "./AuthButtons";
 import SignUpImg from "../assets/SignUpImg.png";
 
 const SignUpBox = () => {
 return (
-    <Grid
-    container
-    sx={{
-      display: 'flex',
-      flexFlow: 'row wrap',
-      justifyItems: 'center',
-      alignItems: 'center',
-      minWidth: '100px',
-      maxWidth: '300px',
-      minHeight: '218px',
-      maxHeight: '300px',
-      textAlign: 'center',
-      backgroundColor: 'lightblue',
-borderRadius: '10px',
-    }}
-  >
-    <Grid item>
-      <img src={SignUpImg} alt="sign up img" sx={{width: '50%', height: '50%'}}/>
-    </Grid>
-    <Grid item>
+    <div className="centerContainerSU"  >
+    <div>
+      <img src={SignUpImg} alt="sign up img" sx={{width: '70%', height: '70%'}}/>
+    </div>
+    <div>
       <AuthButtons />
-    </Grid>
-  </Grid>
+    </div>
+  </div>
 )
 };
 
