@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Modal.css';
 import Grid from "@mui/joy/Grid";
+import Growth from '../assets/GrowthSM.svg';
 
 function ModalSignUpForm({ isOpen, onClose }) {
   const [firstName, setfirstName] = useState('');
@@ -54,7 +55,7 @@ function ModalSignUpForm({ isOpen, onClose }) {
         <form className="modal-content animate" onSubmit={handleSignUp}>
           <Grid className="imgcontainer">
             <span onClick={onClose} className="close" title="Close Modal">&times;</span>
-            <img src="img_avatar2.png" alt="Avatar" className="avatar" />
+            <img src={Growth} alt="Avatar" className="avatar" />
           </Grid>
 
           <Grid className="container">

@@ -3,6 +3,7 @@ import "../styles/Profile.css";
 import Avatar from "../assets/avatarplaceholder.png";
 
 function Profile() {
+  const serverUrl = 'http://localhost:3001';
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
     profilePicture: Avatar,
@@ -47,6 +48,7 @@ function Profile() {
               contactInfo: data.contactInfo || '',
               favBooks: data.favBooks || '',
             });
+            console.log('Profile Picture Path:', profileData.profilePicture);
           } else {
             console.error('Failed to fetch profile data');
           }
@@ -70,10 +72,13 @@ function Profile() {
   };
 
   const handleFileChange = (e) => {
-    setProfileData({
-      ...profileData,
-      profilePicture: e.target.files[0],
-    });
+    const file = e.target.files[0];
+    if (file) {
+      setProfileData({
+        ...profileData,
+        profilePicture: URL.createObjectURL(file),
+      });
+    }
   };
 
   const toggleEdit = () => {
@@ -122,7 +127,7 @@ function Profile() {
         <div>
           <div className='spaced'>
             <h2>Profile</h2>
-            <img className="avatarContainer" src={profileData.profilePicture || Avatar} alt="profile" />
+            <img className="avatarContainer" src={profileData.profilePicture ? `${serverUrl}${profileData.profilePicture}`: Avatar} alt="profile" />
             {isEditing && (
               <input
                 type="file"
