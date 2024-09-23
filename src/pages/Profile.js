@@ -3,8 +3,8 @@ import "../styles/Profile.css";
 import Avatar from "../assets/avatarplaceholder.png";
 
 function Profile() {
-  const serverUrl = 'http://localhost:3001';
   const [isEditing, setIsEditing] = useState(false);
+  const [preview, setPreview] = useState(Avatar);
   const [profileData, setProfileData] = useState({
     profilePicture: Avatar,
     firstName: '',
@@ -39,7 +39,7 @@ function Profile() {
 
             // Populate the state with user data
             setProfileData({
-              profilePicture: data.profilePicture || Avatar, 
+              profilePicture: data.profilePicture || Avatar,
               firstName: data.firstName || '',
               title: data.title || '',
               bio: data.bio || '',
@@ -57,7 +57,8 @@ function Profile() {
         }
       };
 
-      fetchProfileData();  // Fetch profile data if userId is available
+      fetchProfileData();  
+ // Fetch profile data if userId is available
     } else {
       console.error('User ID not found in localStorage');
     }
@@ -76,8 +77,10 @@ function Profile() {
     if (file) {
       setProfileData({
         ...profileData,
-        profilePicture: URL.createObjectURL(file),
+        profilePicture: profileData.profilePicture,
       });
+      setPreview(profileData.profilePicture); 
+      console.log('Profile Picture Path:', profileData.profilePicture);// Set the preview
     }
   };
 
@@ -98,6 +101,8 @@ function Profile() {
     if (profileData.profilePicture) {
       formData.append('profilePicture', profileData.profilePicture);
     }
+    console.log('Profile Data Before Save:', profileData);
+
 
     try {
       const response = await fetch(`http://localhost:3001/profile`, {
@@ -127,7 +132,7 @@ function Profile() {
         <div>
           <div className='spaced'>
             <h2>Profile</h2>
-            <img className="avatarContainer" src={profileData.profilePicture ? `${serverUrl}${profileData.profilePicture}`: Avatar} alt="profile" />
+            <img className="avatarContainer" src={profileData.profilePicture} alt="profile" />
             {isEditing && (
               <input
                 type="file"

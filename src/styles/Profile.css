@@ -4,7 +4,8 @@
     align-items: stretch;
     justify-content: center;
     padding: 10px 0 0 0;
-    height: 550px;
+    min-height: 550px;
+    max-height: 750px;
     width: auto;
     background-color: darkgoldenrod;
     margin: 30px 180px 30px 180px;
@@ -14,7 +15,9 @@
 .avatarContainer {
     display: flex;
     justify-content: center;
-    width: 90%;
+    min-width: 50px;
+    max-width: 200px;
+    border-radius: 20px;
   }
 
 .profileButtons {
