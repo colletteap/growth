@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import SkillLandingDropDown from "./SkillLandingDropDown";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import "../styles/Skilllanding.css";
 import SkillButton from "./Skillbutton";
-import { skillData } from "./Data";
 
 const SkillLanding = () => {
+  const [skills, setSkills] = useState([]);
   const matches = useMediaQuery("(min-width:768px)");
   console.log("matches", matches);
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/skills`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          setSkills(data); // Assuming data is an array of skill objects
+        } else {
+          console.error('Failed to fetch skills data');
+        }
+      } catch (error) {
+        console.error('Error fetching skills data:', error);
+      }
+    };
+  
+    fetchSkills();
+  }, []);
 
   return (
     <>
@@ -20,11 +44,11 @@ const SkillLanding = () => {
         </Grid>
         {matches && (
           <Grid className="SkillContainer">
-            {skillData.map((skill, index) => (
+            {skills.map((skill, index) => (
               <SkillButton
                 key={index}
-                skill={skill.skill}
-                linkTo={skill.linkTo}
+                skill={skill.skill_name}
+                linkTo={skill.url}
               />
             ))}
           </Grid>
