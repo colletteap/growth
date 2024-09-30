@@ -41,12 +41,12 @@ const SkillLanding = () => {
     <div>
     <h1 className="whiteHeading" style={{ fontSize: '36px' }}>Learn skills from fellow teachers</h1>
 
-      <Grid>
-        <Grid item xs={6} className="skillButton">
+      <div>
+        <div className="skillButton">
           <SkillLandingDropDown />
-        </Grid>
+        </div>
         {matches && (
-          <Grid className="SkillContainer">
+          <div className="SkillContainer">
             {skills.map((skill, index) => (
               <SkillButton
                 key={index}
@@ -54,9 +54,9 @@ const SkillLanding = () => {
                 linkTo={skill.url}
               />
             ))}
-          </Grid>
+          </div>
         )}
-      </Grid>
+      </div>
     </div>
   );
 };

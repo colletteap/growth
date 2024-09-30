@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ModalLoginForm from "./ModalLoginForm";
 import ModalSignUpForm from "./ModalSignUpForm";
-import Grid from "@mui/joy/Grid";
+import { Grid } from "@mui/material";
 import Button from "@mui/joy/Button";
 
 function AuthButtons() {
