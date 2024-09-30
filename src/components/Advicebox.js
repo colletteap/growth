@@ -1,13 +1,12 @@
 import * as React from "react";
+import { Grid } from "@mui/joy";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
-import Link from "@mui/joy/Link";
 import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
 
-export default function AdviceBox({ type, question, linkTo, comment }) {
+export default function AdviceBox({ type, question, comment }) {
   return (
-    <Link to={linkTo} underline="none">
       <Card
         variant="outlined"
         sx={{
@@ -24,43 +23,25 @@ export default function AdviceBox({ type, question, linkTo, comment }) {
             padding: "8px",
           }}
         >
-          <Link
-            to={linkTo}
-            component="button"
-            underline="none"
-            fontSize="sm"
-            fontWeight="lg"
-            textColor="text.primary"
-          ></Link>
           <Typography fontSize="sm">
-            <Link
-              to={linkTo}
+            <Grid
               component="button"
               color="neutral"
+              borderRadius="5px"
               fontWeight="lg"
               textColor="#233349"
             >
               {type}
-            </Link>{" "}
+            </Grid>{" "}
             {question}
           </Typography>
-          <Link
-            to={linkTo}
-            component="button"
-            underline="none"
-            fontSize="sm"
-            startDecorator="…"
-            sx={{ color: "text.tertiary" }}
+          <Grid
+            sx={{ color: "#D4E1F4",
+              padding: "8px" }}
           >
-            more
-          </Link>
-          <Link
-            to={linkTo}
-            component="button"
-            underline="none"
-            fontSize="10px"
-            sx={{ color: "text.tertiary" }}
-          ></Link>
+            ...more
+          </Grid>
+          
         </CardContent>
 
         <CardContent orientation="horizontal" sx={{ display: "flex", gap: 1 }}>
@@ -75,17 +56,14 @@ export default function AdviceBox({ type, question, linkTo, comment }) {
               padding: "5px",
             }}
           />
-          <Link
-            underline="none"
-            role="button"
-            border="1px solid #233349"
-            borderRadius="10px"
-            padding="5px"
+          <Grid
+            sx={{ border: "2px solid #233349",
+              borderRadius: "10px",
+              padding: "8px" }}
           >
             Post
-          </Link>
+          </Grid>
         </CardContent>
       </Card>
-    </Link>
   );
 }

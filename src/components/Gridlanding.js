@@ -1,5 +1,5 @@
 import React from "react";
-import Grid from "@mui/joy/Grid";
+import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import LogoText from "../assets/NewInfo.png";
 import smallTop from "../assets/smallTop.svg";
@@ -18,10 +18,10 @@ const GridLanding = () => {
   return (
     <>
       <Grid className="GridContainer">
-        <Grid className="ImageContainer">
+        <Grid item className="ImageContainer">
           <SignUpBox/>
         </Grid>
-        <Grid className="ImageContainerText">
+        <Grid item className="ImageContainerText">
           {matches ? null : (<img src={LogoText} alt="LogoText" />)}
            {min ? null : (<img src={smallTop} alt="Logo Explanation" />)}
         </Grid>

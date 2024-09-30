@@ -23,19 +23,16 @@ const adviceData = [
   {
     type: "Question:",
     question: "How do I manage my workload?",
-    linkTo: "/Advice",
     comment: "Setting boundaries really helped me.",
   },
   {
     type: "Advice:",
     question: "Pro-tip: Turn your work notifications off after work",
-    linkTo: "/Advice",
     comment: "True! I keep an alarm on my phone to remind me.",
   },
   {
     type: "Question:",
     question: "Google Classroom confuses me. Help!",
-    linkTo: "/Advice",
     comment: "NewEd Tech on YouTube has been my game changer!",
   },
 ];

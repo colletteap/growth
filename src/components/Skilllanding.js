@@ -22,9 +22,11 @@ const SkillLanding = () => {
   
         if (response.ok) {
           const data = await response.json();
-          setSkills(data); // Assuming data is an array of skill objects
+          setSkills(data); 
+          console.log('Fetched skills:', data); // Log the fetched data
         } else {
-          console.error('Failed to fetch skills data');
+          const errorText = await response.text();
+          console.error('Failed to fetch skills data:', response.status, errorText);
         }
       } catch (error) {
         console.error('Error fetching skills data:', error);
@@ -33,9 +35,10 @@ const SkillLanding = () => {
   
     fetchSkills();
   }, []);
+  
 
   return (
-    <>
+    <div>
     <h1 className="whiteHeading" style={{ fontSize: '36px' }}>Learn skills from fellow teachers</h1>
 
       <Grid>
@@ -54,7 +57,7 @@ const SkillLanding = () => {
           </Grid>
         )}
       </Grid>
-    </>
+    </div>
   );
 };
 

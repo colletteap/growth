@@ -124,7 +124,8 @@ function Profile() {
       console.error('Error updating profile:', error);
     }
   };
-
+console.log(profileData.profilePicture)
+console.log(`http://localhost:3001${profileData.profilePicture}`)
   return (
     <div className='ProfileContainer'>
       {/* First Column */}
@@ -132,7 +133,7 @@ function Profile() {
         <div>
           <div className='spaced'>
             <h2>Profile</h2>
-            <img className="avatarContainer" src={profileData.profilePicture} alt="profile" />
+            <img className="avatarContainer" src={`http://localhost:3001${profileData.profilePicture}`} alt="profile" />
             {isEditing && (
               <input
                 type="file"

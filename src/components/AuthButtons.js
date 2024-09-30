@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import ModalLoginForm from './ModalLoginForm';
-import ModalSignUpForm from './ModalSignUpForm';
+import React, { useState } from "react";
+import ModalLoginForm from "./ModalLoginForm";
+import ModalSignUpForm from "./ModalSignUpForm";
 import Grid from "@mui/joy/Grid";
-import Button from '@mui/joy/Button';
+import Button from "@mui/joy/Button";
 
 function AuthButtons() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -25,61 +25,66 @@ function AuthButtons() {
   };
 
   return (
-    <Grid style={{
+    <Grid
+      style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
         gridGap: "10px",
         padding: "10px",
         justifyItems: "center",
       }}
+    >
+      <Grid item xs={6}
+        sx={{
+          "& .css-6yr8k6": {
+            "--Grid-columns": "unset",
+          },
+        }}
       >
-      <Grid 
-  item 
-  xs={6} 
-  sx={{
-    '& .css-6yr8k6': {
-      '--Grid-columns': 'unset',
-    },
-  }}
->
-        <Button sx={{
-          bgcolor: "#233349",
-          width: "100%",
-          color: "#ffff",
-          fontWeight: "bolder",
-          borderRadius: "10px",
-          "&:hover": { backgroundColor: "#5378AB" },
-        }}
-        onClick={handleOpenLoginModal}
+        <Button
+          sx={{
+            bgcolor: "#233349",
+            width: "100%",
+            color: "#ffff",
+            fontWeight: "bolder",
+            borderRadius: "10px",
+            "&:hover": { backgroundColor: "#5378AB" },
+          }}
+          onClick={handleOpenLoginModal}
         >
-        Log In
-      </Button>
+          Log In
+        </Button>
       </Grid>
-      <Grid 
-  item 
-  xs={6} 
-  sx={{
-    '& .css-6yr8k6': {
-      '--Grid-columns': 'unset',
-    },
-  }}
->
-      <Button sx={{
-          bgcolor: "#233349",
-          width: "100%",
-          color: "#ffff",
-          fontWeight: "bolder",
-          borderRadius: "10px",
-          "&:hover": { backgroundColor: "#5378AB" },
+      <Grid item xs={6}
+        sx={{
+          "& .css-6yr8k6": {
+            "--Grid-columns": "unset",
+          },
         }}
-        onClick={handleOpenSignUpModal}
+      >
+        <Button
+          sx={{
+            bgcolor: "#233349",
+            width: "100%",
+            color: "#ffff",
+            fontWeight: "bolder",
+            borderRadius: "10px",
+            "&:hover": { backgroundColor: "#5378AB" },
+          }}
+          onClick={handleOpenSignUpModal}
         >
-        Sign Up
-      </Button>
+          Sign Up
+        </Button>
       </Grid>
 
-      <ModalLoginForm isOpen={isLoginModalOpen} onClose={handleCloseLoginModal} />
-      <ModalSignUpForm isOpen={isSignUpModalOpen} onClose={handleCloseSignUpModal} />
+      <ModalLoginForm
+        isOpen={isLoginModalOpen}
+        onClose={handleCloseLoginModal}
+      />
+      <ModalSignUpForm
+        isOpen={isSignUpModalOpen}
+        onClose={handleCloseSignUpModal}
+      />
     </Grid>
   );
 }
