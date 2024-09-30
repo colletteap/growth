@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "@mui/material";
 import SkillLandingDropDown from "./SkillLandingDropDown";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import "../styles/Skilllanding.css";
@@ -11,7 +10,7 @@ const SkillLanding = () => {
   console.log("matches", matches);
 
   useEffect(() => {
-    const fetchSkills = async () => {
+    const getSkills = async () => {
       try {
         const response = await fetch(`http://localhost:3001/skills`, {
           method: 'GET',
@@ -33,7 +32,7 @@ const SkillLanding = () => {
       }
     };
   
-    fetchSkills();
+    getSkills();
   }, []);
   
 
