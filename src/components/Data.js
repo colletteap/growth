@@ -19,24 +19,6 @@ const skillData = [
   { skill: "More +", linkTo: "/SkillShell" },
 ];
 
-const adviceData = [
-  {
-    type: "Question:",
-    question: "How do I manage my workload?",
-    comment: "Setting boundaries really helped me.",
-  },
-  {
-    type: "Advice:",
-    question: "Pro-tip: Turn your work notifications off after work",
-    comment: "True! I keep an alarm on my phone to remind me.",
-  },
-  {
-    type: "Question:",
-    question: "Google Classroom confuses me. Help!",
-    comment: "NewEd Tech on YouTube has been my game changer!",
-  },
-];
-
 const blogData = [
   {
     title: "Google Classroom Tips",
@@ -461,7 +443,6 @@ const urls = [
 
 export {
   skillData,
-  adviceData,
   blogData,
   skillShellData,
   askAdviceCardData,
