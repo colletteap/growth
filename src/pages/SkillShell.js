@@ -68,7 +68,7 @@ export default function SkillShellPage() {
         </Grid>
       </Grid>
       <Grid sx={{ padding: "60px 20px 20px 20px" }}>
-        
+      
           <Grid className="dropDownContainer">
             <SkillShellDropDown onChange={handleSkillSelect} />
           </Grid>
