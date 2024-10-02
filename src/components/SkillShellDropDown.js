@@ -18,8 +18,8 @@ export default function SkillShellDropDown({ onChange }) {
 
         if (response.ok) {
           const data = await response.json();
-          setSkills(data); // Update skills with the fetched data
-          console.log('Fetched skills:', data); // Log the fetched data for debugging
+          setSkills(data); 
+          console.log('Fetched skills:', data); 
         } else {
           const errorText = await response.text();
           console.error('Failed to fetch skills data:', response.status, errorText);
@@ -29,12 +29,12 @@ export default function SkillShellDropDown({ onChange }) {
       }
     };
 
-    getSkills(); // Call the fetch function when the component mounts
-  }, []); // Empty dependency array to run this effect only once when the component mounts
+    getSkills(); 
+  }, []); 
 
   const handleSkillChange = (event, newValue) => {
     setSelectedSkill(newValue);
-    onChange(newValue); // Propagate the selected skill upwards
+    onChange(newValue); 
   };
 
   return (

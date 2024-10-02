@@ -2,13 +2,34 @@ import * as React from "react";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
-import { skillInfo } from "./Data";
 import Grid from "@mui/joy/Grid";
 
 export default function BlankSkillCard({ skillname }) {
-  const filteredSkills = skillInfo.filter(
-    (item) => item.skill === skillname.skillname
-  );
+  const [skillData, setSkillData] = React.useState([]);
+
+  React.useEffect(() => {
+    const fetchSkillInfo = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/skillInfo?skill=${skillname.skillname}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setSkillData(data); 
+        } else {
+          console.error('Failed to fetch skill info');
+        }
+      } catch (error) {
+        console.error('Error fetching skill info:', error);
+      }
+    };
+
+    fetchSkillInfo(); 
+  }, [skillname]);
 
   const container = {
     display: "flex",
@@ -41,7 +62,7 @@ export default function BlankSkillCard({ skillname }) {
       <Grid style={container}>
         <h1 style={headingStyle}>Learn new skills</h1>
         <Grid style={cardStyle}>
-          {filteredSkills.map((item, index) => (
+          {skillData.map((item, index) => (
             <Card
               key={index}
               variant="outlined"
