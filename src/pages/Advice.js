@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Advice.css";
 import Grid from "@mui/joy/Grid";
 import ActionButton from "../components/Actionbutton";
@@ -8,9 +8,6 @@ import SearchBar from "../components/Searchbar";
 import Magic from "../assets/MagicSeg.png";
 import AdviceText from "../assets/AdviceTextHQ.png";
 import Footer from "../components/Footer";
-import { askAdviceCardData } from "../components/Data";
-
-// Import statements
 
 function Advice() {
   const [showPostcard, setShowPostcard] = useState(false);
@@ -20,31 +17,49 @@ function Advice() {
     return storedComments ? JSON.parse(storedComments) : [];
   });
   const [searchInput, setSearchInput] = useState("");
+  const [askAdviceCardData, setAskAdviceCardData] = useState([]);
 
-  // State hooks, toggling visibility, defining commentsArray variable to come from local storage if any
+  useEffect(() => {
+    const fetchAskAdviceCardData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/askAdviceCardData", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setAskAdviceCardData(data); // Set the fetched data
+        } else {
+          console.error("Failed to fetch advice data");
+        }
+      } catch (error) {
+        console.error("Error fetching advice data:", error);
+      }
+    };
+
+    fetchAskAdviceCardData(); // Fetch data when the component loads
+  }, []);
 
   const handleSearchChange = (event) => {
     setSearchInput(event.target.value);
   };
 
-  console.log("commentsArray filter", commentsArray);
-  
   const filteredComments = commentsArray.filter((comment) =>
     comment.text.toLowerCase().includes(searchInput.toLowerCase())
   );
-  console.log("filter:", filteredComments);
 
-  // Event handler to update searchInput for search bar
+  const filteredAdviceData = askAdviceCardData.filter((type) =>
+    type.question.toLowerCase().includes(searchInput.toLowerCase())
+  );
 
   const handleBtnAClick = () => {
-    console.log("show postcard", showPostcard);
     if (!showPostcard) {
       setShowPostcard(true);
       setShowAskQuestion(false);
     }
   };
-
-  // Event handler for visibility of Postcard
 
   return (
     <Grid>
@@ -55,6 +70,7 @@ function Advice() {
       <Grid className="centeredContainer">
         <img className="medImg" src={AdviceText} alt="Advice Text" />
       </Grid>
+
       <>
         <Grid className="questionButtonContainer">
           <Grid>
@@ -83,18 +99,14 @@ function Advice() {
               question={comment.text}
             />
           ))}
-          {askAdviceCardData
-            .filter((type) =>
-              type.question.toLowerCase().includes(searchInput.toLowerCase())
-            )
-            .map((type, index) => (
-              <ContentCard
-                key={index}
-                type={type.type}
-                cardId={type.cardId}
-                question={type.question}
-              />
-            ))}
+          {filteredAdviceData.map((type, index) => (
+            <ContentCard
+              key={index}
+              type={type.type}
+              cardId={type.cardId}
+              question={type.question}
+            />
+          ))}
         </Grid>
       </>
       <Footer />

@@ -1,5 +1,4 @@
 import React, { useState, useEffect }from "react";
-
 import Grid from "@mui/joy/Grid";
 import AdviceBox from "./Advicebox";
 import "../styles/Advicelanding.css";
