@@ -1,13 +1,22 @@
-import * as React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Grid from "@mui/joy/Grid";
+import Button from "@mui/material/Button";
 
 export default function BlankSkillCard({ skillname }) {
-  const [skillData, setSkillData] = React.useState([]);
+  const [skillData, setSkillData] = useState([]);
+  const [userId, setUserId] = useState(null); 
 
-  React.useEffect(() => {
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('userId'); 
+    if (loggedInUser) {
+      setUserId(loggedInUser);
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchSkillInfo = async () => {
       try {
         const response = await fetch(`http://localhost:3001/skillInfo?skill=${skillname.skillname}`, {
@@ -30,6 +39,16 @@ export default function BlankSkillCard({ skillname }) {
 
     fetchSkillInfo(); 
   }, [skillname]);
+
+  const handleUpdate = (skillId) => {
+    // Logic for updating skill
+    console.log('Update skill with ID:', skillId);
+  };
+
+  const handleDelete = (skillId) => {
+    // Logic for deleting skill
+    console.log('Delete skill with ID:', skillId);
+  };
 
   const container = {
     display: "flex",
@@ -105,6 +124,26 @@ export default function BlankSkillCard({ skillname }) {
                   >
                     {item.details}
                   </Typography>
+                    {/* Conditionally render Update and Delete buttons if logged-in user is the post owner */}
+                    {userId === item.userId && (
+                    <div style={{ marginTop: '10px' }}>
+                      <Button 
+                        variant="contained" 
+                        color="primary" 
+                        onClick={() => handleUpdate(item.skillId)}
+                      >
+                        Update
+                      </Button>
+                      <Button 
+                        variant="contained" 
+                        color="secondary" 
+                        onClick={() => handleDelete(item.skillId)}
+                        style={{ marginLeft: '10px' }}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  )}
                 </CardContent>
               </CardContent>
             </Card>

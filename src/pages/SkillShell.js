@@ -10,6 +10,7 @@ import SkillButton from "../components/Skillbutton";
 import BlankSkillCard from "../components/Blankskillcard";
 import SkillShellDropDown from "../components/SkillShellDropDown";
 import Footer from "../components/Footer";
+import Button from "@mui/material/Button";
 
 export default function SkillShellPage() {
   const matches = useMediaQuery("(min-width:769px)");
@@ -22,13 +23,12 @@ export default function SkillShellPage() {
   const [selectedSkill, setSelectedSkill] = useState("");
   const [postContent, setPostContent] = useState("");
   const [message, setMessage] = useState("");
-  const [userId, setUserId] = useState(null);  // To track logged-in user
+  const [userId, setUserId] = useState(null);  
 
-  // Assuming you have logic to retrieve userId from localStorage or another method
   useEffect(() => {
-    const loggedInUser = localStorage.getItem('userId'); // Example of getting userId from localStorage
+    const loggedInUser = localStorage.getItem('userId'); 
     if (loggedInUser) {
-      setUserId(loggedInUser); // Set userId if user is logged in
+      setUserId(loggedInUser);
     }
   }, []);
 
@@ -136,12 +136,12 @@ export default function SkillShellPage() {
       </Grid>
 
       <Grid className="dropDownContainer" sx={{ padding: "60px 20px 20px 20px" }}>
-        <Grid className="topGrid">
+        <Grid className="topGrid wrap">
           <SkillShellDropDown onChange={handleSkillSelect} />
         </Grid>
  {/* Only show post section if user is logged in */}
  {userId && (
-        <Grid className="topGrid" sx={{ padding: "40px 20px" }}>
+        <Grid className="topGrid wrap" sx={{ padding: "40px 20px" }}>
           <h3>Share a Post for: {selectedSkill || 'Select a Skill'}</h3>
           <SkillShellDropDown onChange={(skill) => setSelectedSkill(skill.skill)} />
           {selectedSkill && (
@@ -152,7 +152,7 @@ export default function SkillShellPage() {
                 placeholder={`Write your post for ${selectedSkill}...`}
                 style={{ width: '100%', height: '100px', marginTop: '10px', borderRadius: '10px' }}
               />
-              <button type="submit">Post</button>
+              <Button type="submit">Post</Button>
             </form>
           )}
           {message && <p>{message}</p>}
