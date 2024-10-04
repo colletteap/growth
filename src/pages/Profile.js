@@ -202,12 +202,15 @@ console.log(`http://localhost:3001${profileData.profilePicture}`)
             ) : (
               <div>
                 <div className='spaced'>
+                  <h3>Bio</h3>
                 <p>{profileData.bio || 'A little about yourself'}</p>
                 </div>
                 <div className='spaced'>
+                  <h3>Years of Experience</h3>
                 <p>{profileData.yearsExperience || 'Years of teaching experience'}</p>
                 </div>
                 <div className='spaced'>
+                  <h3>Education</h3>
                 <p>{profileData.education || 'Your education and/or certificates'}</p>
                 </div>
               </div>
@@ -246,12 +249,15 @@ console.log(`http://localhost:3001${profileData.profilePicture}`)
             ) : (
               <div>
                 <div className='spaced'>
+                  <h3>Contact</h3>
                 <p>{profileData.contactInfo || 'Your contact information'}</p>
                 </div>
                 <div className='spaced'>
+                  <h3>Favorite Books</h3>
                 <p>{profileData.favBooks || 'Your favorite resources or books'}</p>
-                <button className="profileButtons" onClick={toggleEdit}>Edit</button>
+
                 </div>
+                <button className="profileButtons" onClick={toggleEdit}>Edit</button>
               </div>
             )}
           </div>
