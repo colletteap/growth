@@ -22,7 +22,7 @@ const SkillLanding = () => {
         if (response.ok) {
           const data = await response.json();
           setSkills(data); 
-          console.log('Fetched skills:', data); // Log the fetched data
+          console.log('Fetched skills:', data);
         } else {
           const errorText = await response.text();
           console.error('Failed to fetch skills data:', response.status, errorText);

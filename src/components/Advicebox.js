@@ -26,10 +26,10 @@ export default function AdviceBox({ type, question, comment }) {
           <Typography fontSize="sm">
             <Grid
               component="button"
-              color="neutral"
+              
               borderRadius="5px"
               fontWeight="lg"
-              textColor="#233349"
+              color="#233349"
             >
               {type}
             </Grid>{" "}

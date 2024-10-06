@@ -24,11 +24,16 @@ export default function SkillShellPage() {
   const [postContent, setPostContent] = useState("");
   const [message, setMessage] = useState("");
   const [userId, setUserId] = useState(null);  
+  const [accessToken, setAccessToken] = useState(null);
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('userId'); 
+    const token = localStorage.getItem('accessToken');  
     if (loggedInUser) {
       setUserId(loggedInUser);
+    }
+    if (token) {
+      setAccessToken(token);  
     }
   }, []);
 
@@ -88,6 +93,7 @@ export default function SkillShellPage() {
       const response = await fetch('http://localhost:3001/addSkillPost', {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
