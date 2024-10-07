@@ -1,16 +1,19 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Grid from "@mui/joy/Grid";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField"; 
 
 export default function BlankSkillCard({ skillname }) {
   const [skillData, setSkillData] = useState([]);
-  const [userId, setUserId] = useState(null); 
+  const [userId, setUserId] = useState(null);
+  const [editingSkillId, setEditingSkillId] = useState(null); 
+  const [updatedDetails, setUpdatedDetails] = useState(""); 
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem('userId'); 
+    const loggedInUser = localStorage.getItem("userId");
     if (loggedInUser) {
       setUserId(loggedInUser);
     }
@@ -19,35 +22,94 @@ export default function BlankSkillCard({ skillname }) {
   useEffect(() => {
     const fetchSkillInfo = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/skillInfo?skill=${skillname.skillname}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+        const response = await fetch(
+          `http://localhost:3001/skillInfo?skill=${skillname.skillname}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (response.ok) {
           const data = await response.json();
-          setSkillData(data); 
+          setSkillData(data);
         } else {
-          console.error('Failed to fetch skill info');
+          console.error("Failed to fetch skill info");
         }
       } catch (error) {
-        console.error('Error fetching skill info:', error);
+        console.error("Error fetching skill info:", error);
       }
     };
 
-    fetchSkillInfo(); 
+    fetchSkillInfo();
   }, [skillname]);
 
-  const handleUpdate = (skillId) => {
-    // Logic for updating skill
-    console.log('Update skill with ID:', skillId);
+  const startEditing = (id, currentDetails) => {
+    setEditingSkillId(id);
+    setUpdatedDetails(currentDetails); 
   };
 
-  const handleDelete = (skillId) => {
-    // Logic for deleting skill
-    console.log('Delete skill with ID:', skillId);
+  const cancelEditing = () => {
+    setEditingSkillId(null); 
+    setUpdatedDetails(""); 
+  };
+
+  const handleUpdate = async (id) => {
+    if (!updatedDetails.trim()) {
+      alert("Details cannot be empty.");
+      return;
+    }
+
+    const token = localStorage.getItem("accessToken");
+
+    try {
+      const response = await fetch(`http://localhost:3001/skillInfo/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify({ details: updatedDetails, userId }),
+      });
+
+      if (response.ok) {
+        
+        setSkillData((prevData) =>
+          prevData.map((item) =>
+            item.id === id ? { ...item, details: updatedDetails } : item
+          )
+        );
+        setEditingSkillId(null); 
+      } else {
+        console.error("Failed to update skill");
+      }
+    } catch (error) {
+      console.error("Error updating skill:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const token = localStorage.getItem("accessToken");
+
+    try {
+      const response = await fetch(`http://localhost:3001/skillInfo/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, 
+        },
+      });
+
+      if (response.ok) {
+        setSkillData((prevData) => prevData.filter((item) => item.id !== id));
+      } else {
+        console.error("Failed to delete skill");
+      }
+    } catch (error) {
+      console.error("Error deleting skill:", error);
+    }
   };
 
   const container = {
@@ -112,36 +174,94 @@ export default function BlankSkillCard({ skillname }) {
                     {item.skill}
                   </Typography>
 
-                  <Typography
-                    sx={{
-                      backgroundColor: "#ffff",
-                      textAlign: "start",
-                      border: "1px solid #233349",
-                      borderRadius: "5px",
-                      padding: "6px",
-                      marginTop: "30px",
-                    }}
-                  >
-                    {item.details}
-                  </Typography>
-                    {/* Conditionally render Update and Delete buttons if logged-in user is the post owner */}
-                    {userId === item.userId && (
-                    <div style={{ marginTop: '10px' }}>
-                      <Button 
-                        variant="contained" 
-                        color="primary" 
-                        onClick={() => handleUpdate(item.skillId)}
-                      >
-                        Update
-                      </Button>
-                      <Button 
-                        variant="contained" 
-                        color="secondary" 
-                        onClick={() => handleDelete(item.skillId)}
-                        style={{ marginLeft: '10px' }}
-                      >
-                        Delete
-                      </Button>
+                  {/* Only show the input field for the skill being edited */}
+                  {editingSkillId === item.id ? (
+                    <TextField
+                      fullWidth
+                      variant="outlined"
+                      value={updatedDetails}
+                      onChange={(e) => setUpdatedDetails(e.target.value)}
+                      sx={{ width: "100% !important", backgroundColor: "#fcf9da", marginTop: "40px", borderRadius: "10px" }}
+                    />
+                  ) : (
+                    <Typography
+                      sx={{
+                        backgroundColor: "#ffff",
+                        textAlign: "start",
+                        border: "1px solid #233349",
+                        borderRadius: "5px",
+                        padding: "6px",
+                        marginTop: "30px",
+                      }}
+                    >
+                      {item.details}
+                    </Typography>
+                  )}
+
+                  {/* Conditionally render Update/Cancel buttons if the user is editing */}
+                  {userId === item.userId && (
+                    <div style={{ marginTop: "10px" }}>
+                      {editingSkillId === item.id ? (
+                        <>
+                          <Button
+                            variant="contained"
+                            sx={{
+                              backgroundColor: "#233349",
+                              color: "#fff", 
+                              "&:hover": {
+                                backgroundColor: "#1a2738", 
+                              },
+                            }}
+                            onClick={() => handleUpdate(item.id)}
+                          >
+                            Save
+                          </Button>
+                          <Button
+                            variant="contained"
+                            sx={{
+                              backgroundColor: "#233349",
+                              color: "#fff", 
+                              "&:hover": {
+                                backgroundColor: "#1a2738", 
+                              },
+                            }}
+                            onClick={cancelEditing}
+                            style={{ marginLeft: "10px" }}
+                          >
+                            Cancel
+                          </Button>
+                        </>
+                      ) : (
+                        <>
+                          <Button
+                            variant="contained"
+                            sx={{
+                              backgroundColor: "#233349",
+                              color: "#fff", 
+                              "&:hover": {
+                                backgroundColor: "#1a2738", 
+                              },
+                            }}
+                            onClick={() => startEditing(item.id, item.details)}
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            variant="contained"
+                            sx={{
+                              backgroundColor: "#233349",
+                              color: "#fff", 
+                              "&:hover": {
+                                backgroundColor: "#1a2738", 
+                              },
+                            }}
+                            onClick={() => handleDelete(item.id)}
+                            style={{ marginLeft: "10px" }}
+                          >
+                            Delete
+                          </Button>
+                        </>
+                      )}
                     </div>
                   )}
                 </CardContent>
