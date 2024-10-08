@@ -92,7 +92,7 @@ export default function BlankSkillCard({ skillname }) {
 
   const handleDelete = async (id) => {
     const token = localStorage.getItem("accessToken");
-
+  
     try {
       const response = await fetch(`http://localhost:3001/skillInfo/${id}`, {
         method: "DELETE",
@@ -100,8 +100,9 @@ export default function BlankSkillCard({ skillname }) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`, 
         },
+        body: JSON.stringify({ userId }), // Send userId in the request body
       });
-
+  
       if (response.ok) {
         setSkillData((prevData) => prevData.filter((item) => item.id !== id));
       } else {
