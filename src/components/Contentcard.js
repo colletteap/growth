@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Link from "@mui/joy/Link";
@@ -6,48 +6,144 @@ import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
 import CustomButton from "../soundReact/customButton";
 
-// Import statements
 
 export default function ContentCard({ type, cardId, question }) {
-  // Defines functional component that accepts 3 props and returns JSX to render a card for displaying and posting comments
+  const [comment, setComment] = useState(""); 
+  const [commentsList, setCommentsList] = useState([]); 
+  const [editingCommentId, setEditingCommentId] = useState(null); 
+  const [updatedComment, setUpdatedComment] = useState(""); 
+  const [userId, setUserId] = useState(null);  
+  const [accessToken, setAccessToken] = useState(null);
 
-  const [comment, setComment] = React.useState("");
-  const [commentsList, setCommentsList] = React.useState(() => {
-    const storedComments = localStorage.getItem(`comments_${cardId}`);
-    return storedComments ? JSON.parse(storedComments) : [];
-  });
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('userId'); 
+    const token = localStorage.getItem('accessToken');  
+    if (loggedInUser) {
+      setUserId(loggedInUser);
+    }
+    if (token) {
+      setAccessToken(token);  
+    }
+    console.log(token);
+  }, []);
 
-  /* State hooks, define comment variable and function setComment with initial value being an empty string
-   The initial value for commentsList is retrieved from local storage using cardId prop, if there
-   is no value, it defaults to an empty array*/
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/comments?cardId=${cardId}`, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, 
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setCommentsList(data); 
+        } else {
+          console.error("Failed to fetch comments");
+        }
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
+    };
+    fetchComments();
+  }, [cardId, accessToken]);
 
-  React.useEffect(() => {
-    console.log("card id", cardId);
-
-    localStorage.setItem(`comments_${cardId}`, JSON.stringify(commentsList));
-  }, [commentsList, cardId]);
-
-  /* This effect hook is used to update local storage whenever commentsList or cardId changes
- & stores commentsList array in local storage under key specific to cardId */
-
-  const handlePostClick = () => {
+  const handlePostClick = async () => {
     if (comment.trim() === "") {
-      // this function called when user clicks Post checks if comment is empty..
+      return; 
+    }
+  
+    const newComment = {
+      cardId,       
+      comment,       
+      userId,        
+    };
+  
+    try {
+      const response = await fetch("http://localhost:3001/comments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`, 
+        },
+        body: JSON.stringify(newComment),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setCommentsList([...commentsList, { ...newComment, id: data.commentId }]); // Add to commentsList
+        setComment(""); 
+      } else {
+        console.error("Failed to post comment");
+      }
+    } catch (error) {
+      console.error("Error posting comment:", error);
+    }
+  };
 
+  // Update a comment
+  const handleUpdateClick = async (id) => {
+    if (!updatedComment.trim()) {
+      alert("Comment cannot be empty.");
       return;
     }
-    const newComment = {
-      id: commentsList.length + 1,
-      text: comment,
-      cardId: commentsList.length + 1,
-    };
-    console.log("new comment", newComment);
-    // If not, it creates a new comment object newComment and adds to commentsList and resets it to an empty string
 
-    setCommentsList([...commentsList, newComment]);
-    setComment("");
+    try {
+      const response = await fetch(`http://localhost:3001/comments/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ text: updatedComment, userId }),
+      });
+
+      if (response.ok) {
+      
+        setCommentsList((prevList) =>
+          prevList.map((comment) => (comment.id === id ? { ...comment, text: updatedComment } : comment))
+        );
+        setEditingCommentId(null);
+      } else {
+        console.error("Failed to update comment");
+      }
+    } catch (error) {
+      console.error("Error updating comment:", error);
+    }
   };
-  // console.log("comment", comment)
+
+  // Delete a comment
+  const handleDeleteClick = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3001/comments/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ userId }), 
+      });
+
+      if (response.ok) {
+    
+        setCommentsList(commentsList.filter((comment) => comment.id !== id));
+      } else {
+        console.error("Failed to delete comment");
+      }
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+    }
+  };
+
+  const startEditing = (id, currentText) => {
+    setEditingCommentId(id);
+    setUpdatedComment(currentText); 
+  };
+
+  const cancelEditing = () => {
+    setEditingCommentId(null);
+    setUpdatedComment("");
+  };
 
   return (
     <Card
@@ -76,13 +172,6 @@ export default function ContentCard({ type, cardId, question }) {
           padding: "8px",
         }}
       >
-        <Link
-          component="button"
-          underline="none"
-          fontSize="sm"
-          fontWeight="lg"
-          textColor="text.primary"
-        ></Link>
         <Typography fontSize="sm" style={{ whiteSpace: "pre-wrap" }}>
           <Link
             component="button"
@@ -95,6 +184,7 @@ export default function ContentCard({ type, cardId, question }) {
           {question}
         </Typography>
       </CardContent>
+
       {commentsList.map((commentItem) => (
         <CardContent
           key={commentItem.id}
@@ -106,9 +196,74 @@ export default function ContentCard({ type, cardId, question }) {
             fontSize: "sm",
           }}
         >
-          {commentItem.text}
+          {editingCommentId === commentItem.id ? (
+            <Input
+              variant="plain"
+              value={updatedComment}
+              onChange={(e) => setUpdatedComment(e.target.value)}
+              sx={{ width: "100%", marginBottom: "10px" }}
+            />
+          ) : (
+            commentItem.text
+          )}
+
+          {/* Edit/Delete buttons only for the user who posted the comment */}
+          {userId === commentItem.userId && (
+            <div style={{ marginTop: "10px" }}>
+              {editingCommentId === commentItem.id ? (
+                <>
+                  <CustomButton
+                    onClick={() => handleUpdateClick(commentItem.id)}
+                    variant={"Save"}
+                    sx={{
+                      backgroundColor: "#233349",
+                      color: "#fff",
+                    }}
+                  >
+                    Save
+                  </CustomButton>
+                  <CustomButton
+                    onClick={cancelEditing}
+                    variant={"Cancel"}
+                    sx={{
+                      backgroundColor: "#8c7b6f",
+                      color: "#fff",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    Cancel
+                  </CustomButton>
+                </>
+              ) : (
+                <>
+                  <CustomButton
+                    onClick={() => startEditing(commentItem.id, commentItem.text)}
+                    variant={"Edit"}
+                    sx={{
+                      backgroundColor: "#233349",
+                      color: "#fff",
+                    }}
+                  >
+                    Edit
+                  </CustomButton>
+                  <CustomButton
+                    onClick={() => handleDeleteClick(commentItem.id)}
+                    variant={"Delete"}
+                    sx={{
+                      backgroundColor: "#8c7b6f",
+                      color: "#fff",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    Delete
+                  </CustomButton>
+                </>
+              )}
+            </div>
+          )}
         </CardContent>
       ))}
+
       <CardContent orientation="horizontal" sx={{ gap: 1 }}>
         <Input
           variant="plain"

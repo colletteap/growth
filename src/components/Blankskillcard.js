@@ -63,7 +63,7 @@ export default function BlankSkillCard({ skillname }) {
     }
 
     const token = localStorage.getItem("accessToken");
-
+    console.log(token);
     try {
       const response = await fetch(`http://localhost:3001/skillInfo/${id}`, {
         method: "PUT",
@@ -100,7 +100,7 @@ export default function BlankSkillCard({ skillname }) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`, 
         },
-        body: JSON.stringify({ userId }), // Send userId in the request body
+        body: JSON.stringify({ userId }), 
       });
   
       if (response.ok) {

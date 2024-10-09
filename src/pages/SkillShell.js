@@ -35,6 +35,7 @@ export default function SkillShellPage() {
     if (token) {
       setAccessToken(token);  
     }
+    console.log(token);
   }, []);
 
   useEffect(() => {
