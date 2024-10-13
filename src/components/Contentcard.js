@@ -10,17 +10,18 @@ export default function ContentCard({ type, id, question, questionUserId }) {
   const [commentsList, setCommentsList] = useState([]); 
   const [editingCommentId, setEditingCommentId] = useState(null); 
   const [updatedComment, setUpdatedComment] = useState(""); 
-  const [editingQuestion, setEditingQuestion] = useState(false); // For question editing
-  const [updatedQuestion, setUpdatedQuestion] = useState(question); // For updating the question
+  const [editingQuestion, setEditingQuestion] = useState(false); 
+  const [updatedQuestion, setUpdatedQuestion] = useState(question); 
   const userId = localStorage.getItem('userId');  
   const accessToken = localStorage.getItem('accessToken');
 
-  // Fetch comments for the specific question id
+  // Fetch comments for the specific comment id
   useEffect(() => {
     const fetchComments = async () => {
       try {
         const response = await fetch(`http://localhost:3001/comments?id=${id}`, {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`, 
           },
         });
@@ -71,57 +72,62 @@ export default function ContentCard({ type, id, question, questionUserId }) {
     }
   };
 
-  // Update a comment
-  const handleUpdateClick = async (commentId) => {
-    if (!updatedComment.trim()) {
-      alert("Comment cannot be empty.");
-      return;
-    }
+// Update a comment
+const handleUpdateClick = async (id) => { 
+  if (!updatedComment.trim()) {
+    alert("Comment cannot be empty.");
+    return;
+  }
+  console.log('Updating comment with id:', id, 'and comment:', updatedComment, 'by user:', userId);
+  try {
+    const response = await fetch(`http://localhost:3001/comments/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({ comment: updatedComment, userId }),
+    });
 
+    if (response.ok) {
+      const updatedData = await response.json();
+
+      // Update the comments list state to reflect the change
+      setCommentsList((prevList) =>
+        prevList.map((comment) => 
+          comment.id === id ? { ...comment, comment: updatedData.comment } : comment
+        )
+      );
+      setEditingCommentId(null);
+    } else {
+      console.error("Failed to update comment");
+    }
+  } catch (error) {
+    console.error("Error updating comment:", error);
+  }
+};
+
+// Delete a comment
+const handleDeleteClick = async (id) => { 
+  console.log('Deleting comment with id:', id, 'by user:', userId);  
     try {
-      const response = await fetch(`http://localhost:3001/comments/${commentId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({ comment: updatedComment, userId }),
-      });
+    const response = await fetch(`http://localhost:3001/comments/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
-      if (response.ok) {
-        setCommentsList((prevList) =>
-          prevList.map((comment) => (comment.id === commentId ? { ...comment, text: updatedComment } : comment))
-        );
-        setEditingCommentId(null);
-      } else {
-        console.error("Failed to update comment");
-      }
-    } catch (error) {
-      console.error("Error updating comment:", error);
+    if (response.ok) {
+      setCommentsList(commentsList.filter((comment) => comment.id !== id));
+    } else {
+      console.error("Failed to delete comment");
     }
-  };
-
-  // Delete a comment
-  const handleDeleteClick = async (commentId) => {
-    try {
-      const response = await fetch(`http://localhost:3001/comments/${commentId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({ userId }), 
-      });
-
-      if (response.ok) {
-        setCommentsList(commentsList.filter((comment) => comment.id !== commentId));
-      } else {
-        console.error("Failed to delete comment");
-      }
-    } catch (error) {
-      console.error("Error deleting comment:", error);
-    }
-  };
+  } catch (error) {
+    console.error("Error deleting comment:", error);
+  }
+};
 
   // Start editing a comment
   const startEditing = (commentId, currentText) => {
