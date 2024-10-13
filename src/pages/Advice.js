@@ -12,17 +12,22 @@ import Footer from "../components/Footer";
 function Advice() {
   const [showPostcard, setShowPostcard] = useState(false);
   const [showAskQuestion, setShowAskQuestion] = useState(true);
-  const [commentsArray, setCommentsArray] = useState(() => {
-    const storedComments = localStorage.getItem("commentsArray");
-    return storedComments ? JSON.parse(storedComments) : [];
-  });
-  const [searchInput, setSearchInput] = useState("");
-  const [askAdviceCardData, setAskAdviceCardData] = useState([]);
+  const [askAdviceCardData, setAskAdviceCardData] = useState([]); // For questions
+  const [newQuestion, setNewQuestion] = useState(""); // State for new question
+  const [accessToken, setAccessToken] = useState(null);
 
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken'); 
+    if (token) {
+      setAccessToken(token); 
+    }
+  }, []);
+
+  // Fetch all questions from the backend
   useEffect(() => {
     const fetchAskAdviceCardData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/askAdviceCardData", {
+        const response = await fetch("http://localhost:3001/questions", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -30,7 +35,7 @@ function Advice() {
         });
         if (response.ok) {
           const data = await response.json();
-          setAskAdviceCardData(data); // Set the fetched data
+          setAskAdviceCardData(data); // Set the fetched questions data
         } else {
           console.error("Failed to fetch advice data");
         }
@@ -39,32 +44,50 @@ function Advice() {
       }
     };
 
-    fetchAskAdviceCardData(); // Fetch data when the component loads
+    fetchAskAdviceCardData(); // Fetch questions when the component loads
   }, []);
 
-  const handleSearchChange = (event) => {
-    setSearchInput(event.target.value);
-  };
+  // Post a new question
+  const handlePostQuestion = async () => {
+    if (!newQuestion.trim()) {
+      return;
+    }
 
-  const filteredComments = commentsArray.filter((comment) =>
-    comment.text.toLowerCase().includes(searchInput.toLowerCase())
-  );
+    const cardId = Date.now(); // Generate a unique cardId for the question
+    const userId = localStorage.getItem('userId');
+    const questionData = {
+      cardId,
+      question: newQuestion,
+      userId,
+    };
 
-  const filteredAdviceData = askAdviceCardData.filter((type) =>
-    type.question.toLowerCase().includes(searchInput.toLowerCase())
-  );
+    try {
+      const response = await fetch("http://localhost:3001/questions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`, 
+        },
+        body: JSON.stringify(questionData),
+      });
 
-  const handleBtnAClick = () => {
-    if (!showPostcard) {
-      setShowPostcard(true);
-      setShowAskQuestion(false);
+      if (response.ok) {
+        const data = await response.json();
+        setAskAdviceCardData([...askAdviceCardData, { ...questionData, id: data.questionId }]);
+        setNewQuestion(""); // Clear the input field
+        setShowPostcard(false); // Hide the question form after posting
+      } else {
+        console.error("Failed to post question");
+      }
+    } catch (error) {
+      console.error("Error posting question:", error);
     }
   };
 
   return (
     <Grid>
       <Grid className="SearchBarContainer">
-        <SearchBar onChange={handleSearchChange} />
+        <SearchBar />
       </Grid>
 
       <Grid className="centeredContainer">
@@ -75,12 +98,14 @@ function Advice() {
         <Grid className="questionButtonContainer">
           <Grid>
             {showAskQuestion && (
-              <ActionButton skill="Ask Question" onClick={handleBtnAClick} />
+              <ActionButton skill="Ask Question" onClick={() => setShowPostcard(true)} />
             )}
             {showPostcard && (
               <PostCard
                 type="Question"
-                setCommentsArray={setCommentsArray}
+                value={newQuestion}
+                onChange={(e) => setNewQuestion(e.target.value)} // Bind input to state
+                onSubmit={handlePostQuestion} // Call post question handler
                 setShowPostcard={setShowPostcard}
                 setShowAskQuestion={setShowAskQuestion}
               />
@@ -91,20 +116,12 @@ function Advice() {
           <img className="magicBand" src={Magic} alt="shooting stars" />
         </Grid>
         <Grid sx={{ padding: "20px" }} className="receiveAdviceDiv">
-          {filteredComments.map((comment) => (
-            <ContentCard
-              key={comment.id}
-              type={"Question:"}
-              cardId={comment.cardId}
-              question={comment.text}
-            />
-          ))}
-          {filteredAdviceData.map((type, index) => (
+          {askAdviceCardData.map((question, index) => (
             <ContentCard
               key={index}
-              type={type.type}
-              cardId={type.cardId}
-              question={type.question}
+              type={question.type}
+              cardId={question.cardId}
+              question={question.question}
             />
           ))}
         </Grid>

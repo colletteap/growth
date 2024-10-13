@@ -1,36 +1,25 @@
 import React, { useState, useEffect } from "react";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
-import Link from "@mui/joy/Link";
 import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
 import CustomButton from "../soundReact/customButton";
 
-
-export default function ContentCard({ type, cardId, question }) {
+export default function ContentCard({ type, id, question, questionUserId }) {
   const [comment, setComment] = useState(""); 
   const [commentsList, setCommentsList] = useState([]); 
   const [editingCommentId, setEditingCommentId] = useState(null); 
   const [updatedComment, setUpdatedComment] = useState(""); 
-  const [userId, setUserId] = useState(null);  
-  const [accessToken, setAccessToken] = useState(null);
+  const [editingQuestion, setEditingQuestion] = useState(false); // For question editing
+  const [updatedQuestion, setUpdatedQuestion] = useState(question); // For updating the question
+  const userId = localStorage.getItem('userId');  
+  const accessToken = localStorage.getItem('accessToken');
 
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem('userId'); 
-    const token = localStorage.getItem('accessToken');  
-    if (loggedInUser) {
-      setUserId(loggedInUser);
-    }
-    if (token) {
-      setAccessToken(token);  
-    }
-    console.log(token);
-  }, []);
-
+  // Fetch comments for the specific id
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/comments?cardId=${cardId}`, {
+        const response = await fetch(`http://localhost:3001/comments?id=${id}`, {
           headers: {
             Authorization: `Bearer ${accessToken}`, 
           },
@@ -46,19 +35,20 @@ export default function ContentCard({ type, cardId, question }) {
       }
     };
     fetchComments();
-  }, [cardId, accessToken]);
+  }, [id, accessToken]);
 
+  // Post a new comment
   const handlePostClick = async () => {
     if (comment.trim() === "") {
       return; 
     }
-  
+
     const newComment = {
-      cardId,       
+      id,       
       comment,       
       userId,        
     };
-  
+
     try {
       const response = await fetch("http://localhost:3001/comments", {
         method: "POST",
@@ -68,10 +58,10 @@ export default function ContentCard({ type, cardId, question }) {
         },
         body: JSON.stringify(newComment),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
-        setCommentsList([...commentsList, { ...newComment, id: data.commentId }]); // Add to commentsList
+        setCommentsList([...commentsList, { ...newComment, id: data.commentId }]); 
         setComment(""); 
       } else {
         console.error("Failed to post comment");
@@ -95,11 +85,10 @@ export default function ContentCard({ type, cardId, question }) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify({ text: updatedComment, userId }),
+        body: JSON.stringify({ comment: updatedComment, userId }),
       });
 
       if (response.ok) {
-      
         setCommentsList((prevList) =>
           prevList.map((comment) => (comment.id === id ? { ...comment, text: updatedComment } : comment))
         );
@@ -125,7 +114,6 @@ export default function ContentCard({ type, cardId, question }) {
       });
 
       if (response.ok) {
-    
         setCommentsList(commentsList.filter((comment) => comment.id !== id));
       } else {
         console.error("Failed to delete comment");
@@ -135,67 +123,125 @@ export default function ContentCard({ type, cardId, question }) {
     }
   };
 
+  // Start editing a comment
   const startEditing = (id, currentText) => {
     setEditingCommentId(id);
     setUpdatedComment(currentText); 
   };
 
+  // Cancel comment editing
   const cancelEditing = () => {
     setEditingCommentId(null);
     setUpdatedComment("");
   };
 
-  return (
-    <Card
-      variant="outlined"
-      sx={{
-        backgroundColor: "#42536b",
-        width: "300px",
-        fontFamily: "Quicksand",
-        fontWeight: "bold",
-        border: "2px solid #fcf9da",
-        borderRadius: "15px",
-        "--Card-radius": (theme) => theme.vars.radius.xs,
-        height: "20vh",
-        overflowY: "auto",
-        WebkitOverflowScrolling: "touch",
-        "&::-webkit-scrollbar": {
-          display: "none",
+  // Update the question
+  const handleUpdateQuestionClick = async () => {
+    if (!updatedQuestion.trim()) {
+      alert("Question cannot be empty.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:3001/questions/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
         },
-      }}
-    >
-      <CardContent
-        sx={{
-          backgroundColor: "#ffff",
-          border: "2px solid #fcf9da",
-          borderRadius: "10px",
-          padding: "8px",
-        }}
-      >
-        <Typography fontSize="sm" style={{ whiteSpace: "pre-wrap" }}>
-          <Link
-            component="button"
-            color="neutral"
-            fontWeight="lg"
-            textColor="text.primary"
-          >
-            {type}
-          </Link>{" "}
-          {question}
-        </Typography>
+        body: JSON.stringify({ question: updatedQuestion, userId }),
+      });
+
+      if (response.ok) {
+        setEditingQuestion(false);
+      } else {
+        console.error("Failed to update question");
+      }
+    } catch (error) {
+      console.error("Error updating question:", error);
+    }
+  };
+
+  // Delete the question
+  const handleDeleteQuestionClick = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/questions/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ userId }),
+      });
+
+      if (response.ok) {
+        console.log("Question deleted successfully");
+      } else {
+        console.error("Failed to delete question");
+      }
+    } catch (error) {
+      console.error("Error deleting question:", error);
+    }
+  };
+
+  return (
+    <Card variant="outlined">
+      <CardContent>
+        {editingQuestion ? (
+          <Input
+            variant="plain"
+            value={updatedQuestion}
+            onChange={(e) => setUpdatedQuestion(e.target.value)}
+            sx={{ width: "100%", marginBottom: "10px" }}
+          />
+        ) : (
+          <Typography sx={{ fontWeight: "bold" }}>{type} {question}</Typography>
+        )}
       </CardContent>
 
+      {/* Edit/Delete buttons for the question */}
+      {userId === questionUserId && (
+        <div style={{ marginTop: "10px" }}>
+          {editingQuestion ? (
+            <>
+              <CustomButton
+                onClick={handleUpdateQuestionClick}
+                variant={"Save"}
+                sx={{ backgroundColor: "#233349", color: "#fff" }}
+              >
+                Save
+              </CustomButton>
+              <CustomButton
+                onClick={() => setEditingQuestion(false)}
+                variant={"Cancel"}
+                sx={{ backgroundColor: "#8c7b6f", color: "#fff", marginLeft: "10px" }}
+              >
+                Cancel
+              </CustomButton>
+            </>
+          ) : (
+            <>
+              <CustomButton
+                onClick={() => setEditingQuestion(true)}
+                variant={"Edit"}
+                sx={{ backgroundColor: "#233349", color: "#fff" }}
+              >
+                Edit
+              </CustomButton>
+              <CustomButton
+                onClick={handleDeleteQuestionClick}
+                variant={"Delete"}
+                sx={{ backgroundColor: "#8c7b6f", color: "#fff", marginLeft: "10px" }}
+              >
+                Delete
+              </CustomButton>
+            </>
+          )}
+        </div>
+      )}
+
       {commentsList.map((commentItem) => (
-        <CardContent
-          key={commentItem.id}
-          sx={{
-            backgroundColor: "#ffff",
-            border: "2px solid #fcf9da",
-            borderRadius: "10px",
-            padding: "8px",
-            fontSize: "sm",
-          }}
-        >
+        <CardContent key={commentItem.id}>
           {editingCommentId === commentItem.id ? (
             <Input
               variant="plain"
@@ -204,10 +250,10 @@ export default function ContentCard({ type, cardId, question }) {
               sx={{ width: "100%", marginBottom: "10px" }}
             />
           ) : (
-            commentItem.text
+            <Typography>{commentItem.comment}</Typography>
           )}
 
-          {/* Edit/Delete buttons only for the user who posted the comment */}
+          {/* Edit/Delete buttons for comments */}
           {userId === commentItem.userId && (
             <div style={{ marginTop: "10px" }}>
               {editingCommentId === commentItem.id ? (
@@ -215,21 +261,14 @@ export default function ContentCard({ type, cardId, question }) {
                   <CustomButton
                     onClick={() => handleUpdateClick(commentItem.id)}
                     variant={"Save"}
-                    sx={{
-                      backgroundColor: "#233349",
-                      color: "#fff",
-                    }}
+                    sx={{ backgroundColor: "#233349", color: "#fff" }}
                   >
                     Save
                   </CustomButton>
                   <CustomButton
                     onClick={cancelEditing}
                     variant={"Cancel"}
-                    sx={{
-                      backgroundColor: "#8c7b6f",
-                      color: "#fff",
-                      marginLeft: "10px",
-                    }}
+                    sx={{ backgroundColor: "#8c7b6f", color: "#fff", marginLeft: "10px" }}
                   >
                     Cancel
                   </CustomButton>
@@ -237,23 +276,16 @@ export default function ContentCard({ type, cardId, question }) {
               ) : (
                 <>
                   <CustomButton
-                    onClick={() => startEditing(commentItem.id, commentItem.text)}
+                    onClick={() => startEditing(commentItem.id, commentItem.comment)}
                     variant={"Edit"}
-                    sx={{
-                      backgroundColor: "#233349",
-                      color: "#fff",
-                    }}
+                    sx={{ backgroundColor: "#233349", color: "#fff" }}
                   >
                     Edit
                   </CustomButton>
                   <CustomButton
                     onClick={() => handleDeleteClick(commentItem.id)}
                     variant={"Delete"}
-                    sx={{
-                      backgroundColor: "#8c7b6f",
-                      color: "#fff",
-                      marginLeft: "10px",
-                    }}
+                    sx={{ backgroundColor: "#8c7b6f", color: "#fff", marginLeft: "10px" }}
                   >
                     Delete
                   </CustomButton>
@@ -264,11 +296,12 @@ export default function ContentCard({ type, cardId, question }) {
         </CardContent>
       ))}
 
+      {/* Input to add a new comment */}
       <CardContent orientation="horizontal" sx={{ gap: 1 }}>
         <Input
           variant="plain"
           size="sm"
-          placeholder="Add a comment…"
+          placeholder="Add a comment..."
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           sx={{
@@ -281,10 +314,7 @@ export default function ContentCard({ type, cardId, question }) {
           }}
         />
         <CustomButton
-          sx={{
-            backgroundColor: "#8c7b6f",
-            color: "#ffff",
-          }}
+          sx={{ backgroundColor: "#8c7b6f", color: "#ffff" }}
           onClick={handlePostClick}
           variant={"Post"}
           underline="none"

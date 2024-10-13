@@ -1,59 +1,49 @@
 import React, { useState } from "react";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
-import Link from "@mui/joy/Link";
 import Input from "@mui/joy/Input";
 import CustomButton from "../soundReact/customButton";
 
-// Import startements
-
-export default function Postcard({
-  type,
-  cardId,
-  setCommentsArray,
+export default function PostCard({
   setShowPostcard,
   setShowAskQuestion,
 }) {
-  // Declares a functional component named 'Postcard' that accepts 5 props and returns JSX to render a card for posting comments
+  const [question, setQuestion] = useState(""); // Updated state to store the question text
+  const accessToken = localStorage.getItem("accessToken"); // Token for authorization
+  const userId = localStorage.getItem("userId"); // User ID from localStorage
 
-  const [comment, setComment] = useState("");
-  const [commentsList, setCommentsList] = useState([]);
-
-  // These are state hooks; defining a state variable of comment and a function setComment, initial value is an empty string
-
-  const handlePostQuestionClick = () => {
-    if (comment.trim() === "") {
-      // This is the event handler, a function called when user clicks Post button, checks if comment is not empty...
-
-      return;
+  // Handle posting the question
+  const handlePostQuestionClick = async () => {
+    if (question.trim() === "") {
+      return; // Ensure question is not empty
     }
-    const storedComments = localStorage.getItem("commentsArray");
-    const commentsArray = storedComments ? JSON.parse(storedComments) : [];
 
-    const newComment = {
-      id: commentsList.length + 1,
-      type: type,
-      text: comment,
-      cardId: commentsArray.length + 1,
+    const newQuestion = {
+      question, // Text of the question (from the input field)
+      userId,  // User ID of the person posting the question
     };
 
-    // will return object newComment
+    try {
+      const response = await fetch("http://localhost:3001/questions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`, // Include access token for authentication
+        },
+        body: JSON.stringify(newQuestion), // Send question data to the backend
+      });
 
-    localStorage.setItem(
-      "commentsArray",
-      JSON.stringify([newComment, ...commentsArray])
-    );
-
-    // Putting the commentsArray into local storage and creating a newComment to be placed in front of the exisiting commentsArray
-
-    setCommentsList([newComment, ...commentsList]);
-    setComment("");
-    setCommentsArray((prevComments) => [newComment, ...prevComments]);
-    setShowPostcard(false);
-    setShowAskQuestion(true);
+      if (response.ok) {
+        setQuestion(""); // Clear the question input
+        setShowPostcard(false); // Hide the Postcard component after posting
+        setShowAskQuestion(true); // Show the 'Ask Question' button again
+      } else {
+        console.error("Failed to post question");
+      }
+    } catch (error) {
+      console.error("Error posting question:", error);
+    }
   };
-
-  // Updates commentsList, resets comment, adds new comment to commentsArray and updates state to show and hide postcard
 
   return (
     <Card
@@ -62,43 +52,18 @@ export default function Postcard({
         width: "300px",
         border: "2px solid black",
         borderRadius: "15px",
-        "--Card-radius": (theme) => theme.vars.radius.xs,
       }}
     >
       <CardContent>
-        <Link
-          component="button"
-          underline="none"
-          fontWeight="lg"
-          textColor="text.primary"
-        >
-          {type}
-        </Link>
-      </CardContent>
-      {commentsList.map((commentItem) => (
-        <CardContent
-          key={commentItem.id}
-          sx={{
-            border: "2px solid #A8512F",
-            borderRadius: "10px",
-            padding: "8px",
-            fontSize: "sm",
-          }}
-        >
-          {commentItem.text}
-        </CardContent>
-      ))}
-      <CardContent orientation="horizontal" sx={{ gap: 1 }}>
         <Input
           variant="plain"
           size="sm"
           placeholder="Ask a question!"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
+          value={question} // Bound to the state
+          onChange={(e) => setQuestion(e.target.value)}
           sx={{
             flex: 1,
             px: 0,
-            "--Input-focusedThickness": "0px",
             border: "2px solid #233349",
             borderRadius: "5px",
             padding: "5px",
