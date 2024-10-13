@@ -15,7 +15,7 @@ export default function ContentCard({ type, id, question, questionUserId }) {
   const userId = localStorage.getItem('userId');  
   const accessToken = localStorage.getItem('accessToken');
 
-  // Fetch comments for the specific id
+  // Fetch comments for the specific question id
   useEffect(() => {
     const fetchComments = async () => {
       try {
@@ -44,7 +44,7 @@ export default function ContentCard({ type, id, question, questionUserId }) {
     }
 
     const newComment = {
-      id,       
+      id,  // Use the id of the question
       comment,       
       userId,        
     };
@@ -72,14 +72,14 @@ export default function ContentCard({ type, id, question, questionUserId }) {
   };
 
   // Update a comment
-  const handleUpdateClick = async (id) => {
+  const handleUpdateClick = async (commentId) => {
     if (!updatedComment.trim()) {
       alert("Comment cannot be empty.");
       return;
     }
 
     try {
-      const response = await fetch(`http://localhost:3001/comments/${id}`, {
+      const response = await fetch(`http://localhost:3001/comments/${commentId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +90,7 @@ export default function ContentCard({ type, id, question, questionUserId }) {
 
       if (response.ok) {
         setCommentsList((prevList) =>
-          prevList.map((comment) => (comment.id === id ? { ...comment, text: updatedComment } : comment))
+          prevList.map((comment) => (comment.id === commentId ? { ...comment, text: updatedComment } : comment))
         );
         setEditingCommentId(null);
       } else {
@@ -102,9 +102,9 @@ export default function ContentCard({ type, id, question, questionUserId }) {
   };
 
   // Delete a comment
-  const handleDeleteClick = async (id) => {
+  const handleDeleteClick = async (commentId) => {
     try {
-      const response = await fetch(`http://localhost:3001/comments/${id}`, {
+      const response = await fetch(`http://localhost:3001/comments/${commentId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -114,7 +114,7 @@ export default function ContentCard({ type, id, question, questionUserId }) {
       });
 
       if (response.ok) {
-        setCommentsList(commentsList.filter((comment) => comment.id !== id));
+        setCommentsList(commentsList.filter((comment) => comment.id !== commentId));
       } else {
         console.error("Failed to delete comment");
       }
@@ -124,8 +124,8 @@ export default function ContentCard({ type, id, question, questionUserId }) {
   };
 
   // Start editing a comment
-  const startEditing = (id, currentText) => {
-    setEditingCommentId(id);
+  const startEditing = (commentId, currentText) => {
+    setEditingCommentId(commentId);
     setUpdatedComment(currentText); 
   };
 
