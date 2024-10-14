@@ -59,3 +59,15 @@
     transform: scale(0.8);
   }
 }
+
+.contentButton { 
+    background-color: #8c7b6f;
+    color: #fff;
+    margin-left: 10px; 
+    padding: 4px 8px;  
+    font-size: 12px;     
+    min-width: 80px;   
+    height: 30px;    
+}
+
+

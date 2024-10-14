@@ -3,9 +3,10 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
+import "../styles/Advice.css";
 import CustomButton from "../soundReact/customButton";
 
-export default function ContentCard({ type, id, question, questionUserId }) {
+export default function ContentCard({ type, cardId, question, questionUserId }) {
   const [comment, setComment] = useState(""); 
   const [commentsList, setCommentsList] = useState([]); 
   const [editingCommentId, setEditingCommentId] = useState(null); 
@@ -15,14 +16,16 @@ export default function ContentCard({ type, id, question, questionUserId }) {
   const userId = localStorage.getItem('userId');  
   const accessToken = localStorage.getItem('accessToken');
 
+  console.log('CardId:', cardId);
+
   // Fetch comments for the specific comment id
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/comments?id=${id}`, {
+        const response = await fetch(`http://localhost:3001/comments?cardId=${cardId}`, {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`, 
+             
           },
         });
         if (response.ok) {
@@ -36,7 +39,7 @@ export default function ContentCard({ type, id, question, questionUserId }) {
       }
     };
     fetchComments();
-  }, [id, accessToken]);
+  }, [cardId]);
 
   // Post a new comment
   const handlePostClick = async () => {
@@ -45,7 +48,7 @@ export default function ContentCard({ type, id, question, questionUserId }) {
     }
 
     const newComment = {
-      id,  // Use the id of the question
+      cardId,
       comment,       
       userId,        
     };
@@ -73,14 +76,14 @@ export default function ContentCard({ type, id, question, questionUserId }) {
   };
 
 // Update a comment
-const handleUpdateClick = async (id) => { 
+const handleUpdateClick = async (commentId) => { 
   if (!updatedComment.trim()) {
     alert("Comment cannot be empty.");
     return;
   }
-  console.log('Updating comment with id:', id, 'and comment:', updatedComment, 'by user:', userId);
+  console.log('Updating comment with id:', cardId, 'and comment:', updatedComment, 'by user:', userId);
   try {
-    const response = await fetch(`http://localhost:3001/comments/${id}`, {
+    const response = await fetch(`http://localhost:3001/comments/${commentId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -95,7 +98,7 @@ const handleUpdateClick = async (id) => {
       // Update the comments list state to reflect the change
       setCommentsList((prevList) =>
         prevList.map((comment) => 
-          comment.id === id ? { ...comment, comment: updatedData.comment } : comment
+          comment.id === commentId ? { ...comment, comment: updatedData.comment } : comment
         )
       );
       setEditingCommentId(null);
@@ -108,10 +111,10 @@ const handleUpdateClick = async (id) => {
 };
 
 // Delete a comment
-const handleDeleteClick = async (id) => { 
-  console.log('Deleting comment with id:', id, 'by user:', userId);  
+const handleDeleteClick = async (commentId) => { 
+  console.log('Deleting comment with id:', cardId, 'by user:', userId);  
     try {
-    const response = await fetch(`http://localhost:3001/comments/${id}`, {
+    const response = await fetch(`http://localhost:3001/comments/${commentId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -120,7 +123,7 @@ const handleDeleteClick = async (id) => {
     });
 
     if (response.ok) {
-      setCommentsList(commentsList.filter((comment) => comment.id !== id));
+      setCommentsList(commentsList.filter((comment) => comment.id !== commentId));
     } else {
       console.error("Failed to delete comment");
     }
@@ -147,15 +150,16 @@ const handleDeleteClick = async (id) => {
       alert("Question cannot be empty.");
       return;
     }
+    console.log('CardId being sent to backend:', cardId);
 
     try {
-      const response = await fetch(`http://localhost:3001/questions/${id}`, {
+      const response = await fetch(`http://localhost:3001/questions/${cardId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify({ question: updatedQuestion, userId }),
+        body: JSON.stringify({ cardId, question: updatedQuestion, userId }),
       });
 
       if (response.ok) {
@@ -171,7 +175,7 @@ const handleDeleteClick = async (id) => {
   // Delete the question
   const handleDeleteQuestionClick = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/questions/${id}`, {
+      const response = await fetch(`http://localhost:3001/questions/${cardId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -201,7 +205,7 @@ const handleDeleteClick = async (id) => {
             sx={{ width: "100%", marginBottom: "10px" }}
           />
         ) : (
-          <Typography sx={{ fontWeight: "bold" }}>{type} {question}</Typography>
+          <Typography sx={{ fontWeight: "bold" }}>{type}: {question}</Typography>
         )}
       </CardContent>
 
@@ -217,10 +221,10 @@ const handleDeleteClick = async (id) => {
               >
                 Save
               </CustomButton>
-              <CustomButton
+              <CustomButton className="contentButton"
                 onClick={() => setEditingQuestion(false)}
                 variant={"Cancel"}
-                sx={{ backgroundColor: "#8c7b6f", color: "#fff", marginLeft: "10px" }}
+        
               >
                 Cancel
               </CustomButton>

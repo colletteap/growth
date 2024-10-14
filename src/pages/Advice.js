@@ -47,42 +47,42 @@ function Advice() {
     fetchAskAdviceCardData(); // Fetch questions when the component loads
   }, []);
 
-  // Post a new question
-  const handlePostQuestion = async () => {
-    if (!newQuestion.trim()) {
-      return;
-    }
+// Post a new question
+const handlePostQuestion = async () => {
+  if (!newQuestion.trim()) {
+    return;
+  }
 
-    const cardId = Date.now(); // Generate a unique cardId for the question
-    const userId = localStorage.getItem('userId');
-    const questionData = {
-      cardId,
-      question: newQuestion,
-      userId,
-    };
-
-    try {
-      const response = await fetch("http://localhost:3001/questions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`, 
-        },
-        body: JSON.stringify(questionData),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setAskAdviceCardData([...askAdviceCardData, { ...questionData, id: data.questionId }]);
-        setNewQuestion(""); // Clear the input field
-        setShowPostcard(false); // Hide the question form after posting
-      } else {
-        console.error("Failed to post question");
-      }
-    } catch (error) {
-      console.error("Error posting question:", error);
-    }
+  const userId = localStorage.getItem('userId');
+  const questionData = {
+    question: newQuestion,
+    userId,
   };
+
+  try {
+    const response = await fetch("http://localhost:3001/questions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`, 
+      },
+      body: JSON.stringify(questionData),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+    
+      setAskAdviceCardData([...askAdviceCardData, { ...questionData, cardId: data.cardId }]);
+      setNewQuestion(""); 
+      setShowPostcard(true); 
+    } else {
+      console.error("Failed to post question");
+    }
+  } catch (error) {
+    console.error("Error posting question:", error);
+  }
+};
+
 
   return (
     <Grid>
@@ -104,8 +104,8 @@ function Advice() {
               <PostCard
                 type="Question"
                 value={newQuestion}
-                onChange={(e) => setNewQuestion(e.target.value)} // Bind input to state
-                onSubmit={handlePostQuestion} // Call post question handler
+                onChange={(e) => setNewQuestion(e.target.value)} 
+                onSubmit={handlePostQuestion} 
                 setShowPostcard={setShowPostcard}
                 setShowAskQuestion={setShowAskQuestion}
               />
@@ -118,10 +118,11 @@ function Advice() {
         <Grid sx={{ padding: "20px" }} className="receiveAdviceDiv">
           {askAdviceCardData.map((question, index) => (
             <ContentCard
-              key={index}
-              type={question.type}
-              cardId={question.cardId}
-              question={question.question}
+            key={index}
+            type={question.type}
+            cardId={question.cardId}  
+            question={question.question}
+            questionUserId={question.userId} 
             />
           ))}
         </Grid>
