@@ -148,7 +148,7 @@ export default function SkillShellPage() {
         </Grid>
  {/* Only show post section if user is logged in */}
  {userId && (
-        <Grid className="topGrid wrap" sx={{ padding: "40px 20px" }}>
+        <Grid className="topGrid column" sx={{ padding: "40px 20px" }}>
           <h3>Share a Post for: {selectedSkill || 'Select a Skill'}</h3>
           <SkillShellDropDown onChange={(skill) => setSelectedSkill(skill.skill)} />
           {selectedSkill && (
@@ -159,7 +159,7 @@ export default function SkillShellPage() {
                 placeholder={`Write your post for ${selectedSkill}...`}
                 style={{ width: '100%', height: '100px', marginTop: '10px', borderRadius: '10px' }}
               />
-              <Button type="submit">Post</Button>
+              <Button className="postButton" type="submit">Post</Button>
             </form>
           )}
           {message && <p>{message}</p>}

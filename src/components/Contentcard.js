@@ -89,7 +89,7 @@ const handleUpdateClick = async (commentId) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
-      body: JSON.stringify({ comment: updatedComment, userId }),
+      body: JSON.stringify({ commentId, comment: updatedComment, userId }),
     });
 
     if (response.ok) {
@@ -120,6 +120,7 @@ const handleDeleteClick = async (commentId) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
+      body: JSON.stringify({ userId }), 
     });
 
     if (response.ok) {
@@ -211,7 +212,7 @@ const handleDeleteClick = async (commentId) => {
 
       {/* Edit/Delete buttons for the question */}
       {userId === questionUserId && (
-        <div style={{ marginTop: "10px" }}>
+        <div className="rowButtons" style={{ marginTop: "10px" }}>
           {editingQuestion ? (
             <>
               <CustomButton
@@ -234,14 +235,13 @@ const handleDeleteClick = async (commentId) => {
               <CustomButton
                 onClick={() => setEditingQuestion(true)}
                 variant={"Edit"}
-                sx={{ backgroundColor: "#233349", color: "#fff" }}
               >
                 Edit
               </CustomButton>
               <CustomButton
                 onClick={handleDeleteQuestionClick}
                 variant={"Delete"}
-                sx={{ backgroundColor: "#8c7b6f", color: "#fff", marginLeft: "10px" }}
+                sx={{ backgroundColor: "#8c7b6f", color: "#fff", marginLeft: "10px", fontSize: "12px", minWidth: "80px", height: "30px" }}
               >
                 Delete
               </CustomButton>
@@ -251,27 +251,27 @@ const handleDeleteClick = async (commentId) => {
       )}
 
       {commentsList.map((commentItem) => (
-        <CardContent key={commentItem.id}>
+        <CardContent  key={commentItem.id}>
           {editingCommentId === commentItem.id ? (
-            <Input
+            <Input 
               variant="plain"
               value={updatedComment}
               onChange={(e) => setUpdatedComment(e.target.value)}
-              sx={{ width: "100%", marginBottom: "10px" }}
+              sx={{ width: "100%", marginBottom: "10px", borderColor: "black" }}
             />
           ) : (
-            <Typography>{commentItem.comment}</Typography>
+            <Typography >{commentItem.comment}</Typography>
           )}
 
           {/* Edit/Delete buttons for comments */}
           {userId === commentItem.userId && (
-            <div style={{ marginTop: "10px" }}>
+            <div className="rowButtons" style={{ marginTop: "10px" }}>
               {editingCommentId === commentItem.id ? (
                 <>
                   <CustomButton
                     onClick={() => handleUpdateClick(commentItem.id)}
                     variant={"Save"}
-                    sx={{ backgroundColor: "#233349", color: "#fff" }}
+                    sx={{ backgroundColor: "#8c7b6f", color: "#fff" }}
                   >
                     Save
                   </CustomButton>

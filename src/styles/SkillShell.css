@@ -17,6 +17,10 @@
   flex-flow: row wrap;
 }
 
+.column {
+  flex-flow: column wrap;
+}
+
 .img {
   width: 80%;
   height: 100%;
@@ -71,6 +75,11 @@
   display: flex;
 }
 
+.postButton {
+  background-color: #fff !important;
+  color: black !important;
+  font-weight: bolder !important;
+}
 
 
 

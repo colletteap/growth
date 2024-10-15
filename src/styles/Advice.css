@@ -60,14 +60,17 @@
   }
 }
 
-.contentButton { 
-    background-color: #8c7b6f;
-    color: #fff;
-    margin-left: 10px; 
-    padding: 4px 8px;  
-    font-size: 12px;     
-    min-width: 80px;   
-    height: 30px;    
+.border {
+  border: 3px solid;
+  border-radius: 8px;
+  border-color: black;
 }
 
+.rowButtons {
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 12px;     
+    min-width: 80px;   
+    height: 30px; 
+}
 
