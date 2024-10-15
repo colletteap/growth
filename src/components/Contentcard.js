@@ -81,7 +81,7 @@ const handleUpdateClick = async (commentId) => {
     alert("Comment cannot be empty.");
     return;
   }
-  console.log('Updating comment with id:', cardId, 'and comment:', updatedComment, 'by user:', userId);
+  console.log('Updating comment with id:', commentId, 'and comment:', updatedComment, 'by user:', userId);
   try {
     const response = await fetch(`http://localhost:3001/comments/${commentId}`, {
       method: "PUT",
@@ -112,7 +112,7 @@ const handleUpdateClick = async (commentId) => {
 
 // Delete a comment
 const handleDeleteClick = async (commentId) => { 
-  console.log('Deleting comment with id:', cardId, 'by user:', userId);  
+  console.log('Deleting comment with id:', commentId, 'by user:', userId);  
     try {
     const response = await fetch(`http://localhost:3001/comments/${commentId}`, {
       method: "DELETE",
