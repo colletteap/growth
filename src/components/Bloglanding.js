@@ -19,7 +19,7 @@ const BlogLanding = () => {
           if (response.ok) {
             const data = await response.json();
             setBlogLanding(data); 
-            console.log('Fetched blogLanding:', data); // Log the fetched data
+            console.log('Fetched blogLanding:', data); 
           } else {
             const errorText = await response.text();
             console.error('Failed to fetch blogLanding data:', response.status, errorText);
@@ -43,7 +43,7 @@ const BlogLanding = () => {
             title={item.title}
             content={item.content}
             linkTo={item.linkTo}
-            image={item.image}
+            image={`http://localhost:3001${item.image}`}
           />
         ))}
       </Grid>
