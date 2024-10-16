@@ -94,7 +94,7 @@ function Blog() {
               title={type.title}
               content={type.content}
               linkTo={type.linkTo}
-              image={type.image}
+              image={`http://localhost:3001${type.image}`} 
             />
           ))}
       </Grid>
