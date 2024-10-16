@@ -252,7 +252,7 @@ const handleDeleteClick = async (commentId) => {
         {/* Comments Section with max height and scrollbar */}
     <div
       style={{
-        maxHeight: "200px", 
+        maxHeight: "100px", 
         overflowY: "auto",  
         paddingRight: "10px",
       }}
