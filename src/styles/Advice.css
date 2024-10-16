@@ -74,3 +74,7 @@
     height: 30px; 
 }
 
+.cardWidth {
+  max-width: 400px !important;
+}
+

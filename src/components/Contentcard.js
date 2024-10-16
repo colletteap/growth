@@ -196,7 +196,7 @@ const handleDeleteClick = async (commentId) => {
   };
 
   return (
-    <Card variant="outlined">
+    <Card className="cardWidth" variant="outlined">
       <CardContent>
         {editingQuestion ? (
           <Input
@@ -249,7 +249,14 @@ const handleDeleteClick = async (commentId) => {
           )}
         </div>
       )}
-
+        {/* Comments Section with max height and scrollbar */}
+    <div
+      style={{
+        maxHeight: "200px", 
+        overflowY: "auto",  
+        paddingRight: "10px",
+      }}
+    >
       {commentsList.map((commentItem) => (
         <CardContent  key={commentItem.id}>
           {editingCommentId === commentItem.id ? (
@@ -305,6 +312,7 @@ const handleDeleteClick = async (commentId) => {
           )}
         </CardContent>
       ))}
+      </div>
 
       {/* Input to add a new comment */}
       <CardContent orientation="horizontal" sx={{ gap: 1 }}>
