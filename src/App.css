@@ -36,6 +36,13 @@ h4 {
   font-weight: bolder;
 }
 
+h5 {
+  color: #fff;
+  margin: 0;
+  padding: 5px 0 5px 0;
+  font-weight: bolder;
+}
+
 .footer {
   display: flex;
   justify-content: center;

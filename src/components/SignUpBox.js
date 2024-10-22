@@ -6,10 +6,13 @@ import SignUpImg from "../assets/SignUpImg.png";
 const SignUpBox = () => {
 return (
     <div className="centerContainerSU"  >
-    <div>
-      <img src={SignUpImg} alt="sign up img" sx={{width: '70%', height: '70%'}}/>
+    <div  style={{ width: "120%", height: "120%" }}>
+      <img 
+      src={SignUpImg} 
+      alt="sign up img" 
+      />
     </div>
-    <div>
+    <div style={{ padding: "60px 0 0 0" }}>
       <AuthButtons />
     </div>
   </div>

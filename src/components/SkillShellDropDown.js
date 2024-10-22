@@ -48,7 +48,7 @@ export default function SkillShellDropDown({ onChange }) {
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="SEARCH for a Skill"
+          placeholder="skills..."
           InputProps={{
             ...params.InputProps
           }}
