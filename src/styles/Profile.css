@@ -1,15 +1,16 @@
 .ProfileContainer {
     display: flex;
     flex-flow: row wrap;
-    align-items: stretch;
-    justify-content: center;
-    padding: 10px 0 0 0;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px;
     min-height: 550px;
-    max-height: 750px;
-    width: auto;
+    max-height: 1450px;
+    width: 100%;
     background-color: darkgoldenrod;
-    margin: 30px 180px 30px 180px;
+    margin: 20px auto;
     border-radius: 10px;
+    box-sizing: border-box;
 }
   
 .avatarContainer {
@@ -34,11 +35,14 @@
   }
 
 .gridItem {
-  display: flex;
-  align-items: stretch;
-  justify-content: space-evenly;
-  height: 85%;
-  padding: 20px;
+  flex: 1; /* Make each grid item take equal space */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    height: auto; /* Adjust height to fit content */
+    margin: 10px; /* Add margin to create space between grid items */
+    padding: 10px; /* Reduce padding to fit better within the container */
+    box-sizing: border-box; 
 }
 
 .editFields {
