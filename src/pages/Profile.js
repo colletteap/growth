@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Profile.css";
 import Avatar from "../assets/avatarplaceholder.png";
+import getBaseUrl from "../utils/getBaseUrl";
 
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);

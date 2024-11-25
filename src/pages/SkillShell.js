@@ -11,6 +11,7 @@ import BlankSkillCard from "../components/Blankskillcard";
 import SkillShellDropDown from "../components/SkillShellDropDown";
 import Footer from "../components/Footer";
 import Button from "@mui/material/Button";
+import getBaseUrl from "../utils/getBaseUrl";
 
 export default function SkillShellPage() {
   const matches = useMediaQuery("(min-width:769px)");

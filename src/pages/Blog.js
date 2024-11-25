@@ -5,6 +5,7 @@ import SearchBar from "../components/Searchbar";
 import "../styles/Blog.css";
 import Footer from "../components/Footer";
 import CustomButton from "../soundReact/customButton";
+import getBaseUrl from "../utils/getBaseUrl";
 
 function Blog() {
   const [currentUrlIndex, setCurrentUrlIndex] = useState(0);

@@ -8,6 +8,7 @@ import SearchBar from "../components/Searchbar";
 import Magic from "../assets/MagicSeg.png";
 import AdviceText from "../assets/AdviceTextHQ.png";
 import Footer from "../components/Footer";
+import getBaseUrl from "../utils/getBaseUrl";
 
 function Advice() {
   const [showPostcard, setShowPostcard] = useState(false);
