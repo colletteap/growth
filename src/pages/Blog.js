@@ -17,7 +17,7 @@ function Blog() {
   useEffect(() => {
     const fetchBlogPageData = async () => {
       try {
-        const response = await fetch('http://localhost:3001/blogPageData', {
+        const response = await fetch(`${getBaseUrl()}/blogPageData`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ function Blog() {
 
     const fetchUrls = async () => {
       try {
-        const response = await fetch('http://localhost:3001/urls', {
+        const response = await fetch(`${getBaseUrl()}/urls`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

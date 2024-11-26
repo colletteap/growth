@@ -42,7 +42,7 @@ export default function SkillShellPage() {
   useEffect(() => {
     const getSkills = async () => {
       try {
-        const response = await fetch('http://localhost:3001/skillSearch', {
+        const response = await fetch(`${getBaseUrl()}/skillSearch`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -92,7 +92,7 @@ export default function SkillShellPage() {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/addSkillPost', {
+      const response = await fetch(`${getBaseUrl()}/addSkillPost`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${accessToken}`,

@@ -29,7 +29,7 @@ function Profile() {
         const accessToken = localStorage.getItem("accessToken"); // Get accessToken from localStorage
 
         try {
-          const response = await fetch(`http://localhost:3001/profile`, {
+          const response = await fetch(`${getBaseUrl()}/profile`, {
             method: "GET",
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -111,7 +111,7 @@ function Profile() {
     console.log("Profile Data Before Save:", profileData);
 
     try {
-      const response = await fetch(`http://localhost:3001/profile`, {
+      const response = await fetch(`${getBaseUrl()}/profile`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -141,7 +141,7 @@ function Profile() {
             <h2>Profile</h2>
             <img
               className="avatarContainer"
-              src={`http://localhost:3001${profileData.profilePicture}`}
+              src={`${getBaseUrl()}${profileData.profilePicture}`}
               alt="profile"
             />
             {isEditing && (
