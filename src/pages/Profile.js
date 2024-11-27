@@ -136,12 +136,12 @@ function Profile() {
     <div className="ProfileContainer">
       {/* First Column */}
       <div className="gridItem">
-        <div>
+        <div className="fullW">
           <div className="spaced">
             <h2>Profile</h2>
             <img
               className="avatarContainer"
-              src={`${getBaseUrl()}${profileData.profilePicture}`}
+               src={`${getBaseUrl()}${profileData.profilePicture}`}
               alt="profile"
             />
             {isEditing && (
@@ -191,7 +191,7 @@ function Profile() {
       <div className="gridItem">
         <div className="editFields">
           {isEditing ? (
-            <div>
+            <div className="fullW">
               <div className="spaced">
                 <input
                   type="text"
@@ -239,7 +239,7 @@ function Profile() {
               </div>
             </div>
           ) : (
-            <div>
+            <div className="fullW">
               <div className="spaced">
                 <h3>Bio</h3>
                 <p>{profileData.bio || "A little about yourself"}</p>
@@ -267,7 +267,7 @@ function Profile() {
       <div className="gridItem">
         <div className="editFields">
           {isEditing ? (
-            <div>
+            <div className="fullW">
               <div className="spaced">
                 <input
                   type="text"
@@ -303,7 +303,7 @@ function Profile() {
               </div>
             </div>
           ) : (
-            <div>
+            <div className="fullW">
               <div className="spaced">
                 <h3>Contact</h3>
                 <p>{profileData.contactInfo || "Your contact information"}</p>

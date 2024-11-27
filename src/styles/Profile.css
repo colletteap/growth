@@ -19,6 +19,8 @@
     min-width: 50px;
     max-width: 200px;
     border-radius: 20px;
+    align-items: center; 
+  margin: 0 auto;
   }
 
 .profileButtons {
@@ -35,13 +37,11 @@
   }
 
 .gridItem {
-  flex: 1; /* Make each grid item take equal space */
+  flex: 1; 
     display: flex;
-    align-items: center; /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
-    height: auto; /* Adjust height to fit content */
-    margin: 10px; /* Add margin to create space between grid items */
-    padding: 10px; /* Reduce padding to fit better within the container */
+    align-items: center; 
+    justify-content: center; 
+    height: auto; 
     box-sizing: border-box; 
 }
 
@@ -49,10 +49,16 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+  padding: 10px;
+  width: 100%;
 }
 
 .center {
   justify-content: center;
+}
+
+.fullW {
+  width: 100%;
 }
 
 .spaced {
@@ -61,6 +67,8 @@
   border-radius: 10px;
   text-align: center;
   margin-bottom: 20px;
+  width: auto;
+  align-items: center;
 }
 
 
