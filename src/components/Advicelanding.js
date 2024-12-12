@@ -2,6 +2,7 @@ import React, { useState, useEffect }from "react";
 import Grid from "@mui/joy/Grid";
 import AdviceBox from "./Advicebox";
 import "../styles/Advicelanding.css";
+import getBaseUrl from "../utils/getBaseUrl";
 
 const AdviceLanding = () => {
   const [adviceLanding, setAdviceLanding] = useState([]);
@@ -9,7 +10,7 @@ const AdviceLanding = () => {
   useEffect(() => {
     const fetchAdviceLanding = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/adviceLanding`, {
+        const response = await fetch(`${getBaseUrl()}/adviceLanding`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

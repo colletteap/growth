@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Landingblogcard from "./Landingblogcard.js";
 import "../styles/Bloglanding.css";
 import { Grid } from "@mui/joy";
+import getBaseUrl from "../utils/getBaseUrl";
 
 const BlogLanding = () => {
     const [blogLanding, setBlogLanding] = useState([]);
@@ -9,7 +10,7 @@ const BlogLanding = () => {
     useEffect(() => {
       const fetchBlogLanding = async () => {
         try {
-          const response = await fetch(`http://localhost:3001/blogLanding`, {
+          const response = await fetch(`${getBaseUrl()}/blogLanding`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -43,7 +44,7 @@ const BlogLanding = () => {
             title={item.title}
             content={item.content}
             linkTo={item.linkTo}
-            image={`http://localhost:3001${item.image}`}
+            image={`${getBaseUrl()}${item.image}`}
           />
         ))}
       </Grid>

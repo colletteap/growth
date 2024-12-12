@@ -5,6 +5,7 @@ import Typography from "@mui/joy/Typography";
 import Grid from "@mui/joy/Grid";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField"; 
+import getBaseUrl from "../utils/getBaseUrl";
 
 export default function BlankSkillCard({ skillname }) {
   const [skillData, setSkillData] = useState([]);
@@ -23,7 +24,7 @@ export default function BlankSkillCard({ skillname }) {
     const fetchSkillInfo = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3001/skillInfo?skill=${skillname.skillname}`,
+          `${getBaseUrl()}/skillInfo?skill=${skillname.skillname}`,
           {
             method: "GET",
             headers: {
@@ -65,7 +66,7 @@ export default function BlankSkillCard({ skillname }) {
     const token = localStorage.getItem("accessToken");
     console.log(token);
     try {
-      const response = await fetch(`http://localhost:3001/skillInfo/${id}`, {
+      const response = await fetch(`${getBaseUrl()}/skillInfo/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +95,7 @@ export default function BlankSkillCard({ skillname }) {
     const token = localStorage.getItem("accessToken");
   
     try {
-      const response = await fetch(`http://localhost:3001/skillInfo/${id}`, {
+      const response = await fetch(`${getBaseUrl()}/skillInfo/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import getBaseUrl from "../utils/getBaseUrl";
 
 const LogoutButton = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const handleLogout = async (event) => {
     try {
       const token = localStorage.getItem('accessToken'); 
   
-      const response = await fetch('http://localhost:3001/logout', {
+      const response = await fetch(`${getBaseUrl()}/logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

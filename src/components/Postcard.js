@@ -3,6 +3,7 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Input from "@mui/joy/Input";
 import CustomButton from "../soundReact/customButton";
+import getBaseUrl from "../utils/getBaseUrl";
 
 export default function PostCard({
   setShowPostcard,
@@ -24,7 +25,7 @@ export default function PostCard({
     };
 
     try {
-      const response = await fetch("http://localhost:3001/questions", {
+      const response = await fetch(`${getBaseUrl()}/questions`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

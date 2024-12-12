@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Modal.css';
 import Grid from "@mui/joy/Grid";
 import Growth from '../assets/GrowthSM.svg';
+import getBaseUrl from "../utils/getBaseUrl";
 
 function ModalLoginForm({ isOpen, onClose }) {
   const [email, setEmail] = useState('');
@@ -21,7 +22,7 @@ function ModalLoginForm({ isOpen, onClose }) {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3001/login', {
+      const response = await fetch(`${getBaseUrl()}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

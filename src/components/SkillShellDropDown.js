@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import getBaseUrl from "../utils/getBaseUrl";
 
 export default function SkillShellDropDown({ onChange }) {
   const [skills, setSkills] = useState([]);
@@ -9,7 +10,7 @@ export default function SkillShellDropDown({ onChange }) {
   useEffect(() => {
     const getSkills = async () => {
       try {
-        const response = await fetch('http://localhost:3001/skillSearch', {
+        const response = await fetch(`${getBaseUrl()}/skillSearch`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

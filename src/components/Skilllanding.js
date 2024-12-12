@@ -3,6 +3,7 @@ import SkillLandingDropDown from "./SkillLandingDropDown";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import "../styles/Skilllanding.css";
 import SkillButton from "./Skillbutton";
+import getBaseUrl from "../utils/getBaseUrl";
 
 const SkillLanding = () => {
   const [skills, setSkills] = useState([]);
@@ -12,7 +13,7 @@ const SkillLanding = () => {
   useEffect(() => {
     const getSkills = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/skills`, {
+        const response = await fetch(`${getBaseUrl()}/skills`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Modal.css';
 import Grid from "@mui/joy/Grid";
 import Growth from '../assets/GrowthSM.svg';
+import getBaseUrl from "../utils/getBaseUrl";
 
 function ModalSignUpForm({ isOpen, onClose }) {
   const [firstName, setfirstName] = useState('');
@@ -23,7 +24,7 @@ function ModalSignUpForm({ isOpen, onClose }) {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3001/register', {
+      const response = await fetch(`${getBaseUrl()}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

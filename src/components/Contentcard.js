@@ -5,6 +5,7 @@ import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
 import "../styles/Advice.css";
 import CustomButton from "../soundReact/customButton";
+import getBaseUrl from "../utils/getBaseUrl";
 
 export default function ContentCard({ type, cardId, question, questionUserId }) {
   const [comment, setComment] = useState(""); 
@@ -22,7 +23,7 @@ export default function ContentCard({ type, cardId, question, questionUserId }) 
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/comments?cardId=${cardId}`, {
+        const response = await fetch(`${getBaseUrl()}/comments?cardId=${cardId}`, {
           headers: {
             "Content-Type": "application/json",
              
@@ -54,7 +55,7 @@ export default function ContentCard({ type, cardId, question, questionUserId }) 
     };
 
     try {
-      const response = await fetch("http://localhost:3001/comments", {
+      const response = await fetch(`${getBaseUrl()}/comments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -83,7 +84,7 @@ const handleUpdateClick = async (commentId) => {
   }
   console.log('Updating comment with id:', commentId, 'and comment:', updatedComment, 'by user:', userId);
   try {
-    const response = await fetch(`http://localhost:3001/comments/${commentId}`, {
+    const response = await fetch(`${getBaseUrl()}/comments/${commentId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -114,7 +115,7 @@ const handleUpdateClick = async (commentId) => {
 const handleDeleteClick = async (commentId) => { 
   console.log('Deleting comment with id:', commentId, 'by user:', userId);  
     try {
-    const response = await fetch(`http://localhost:3001/comments/${commentId}`, {
+    const response = await fetch(`${getBaseUrl()}/comments/${commentId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -154,7 +155,7 @@ const handleDeleteClick = async (commentId) => {
     console.log('CardId being sent to backend:', cardId);
 
     try {
-      const response = await fetch(`http://localhost:3001/questions/${cardId}`, {
+      const response = await fetch(`${getBaseUrl()}/questions/${cardId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -176,7 +177,7 @@ const handleDeleteClick = async (commentId) => {
   // Delete the question
   const handleDeleteQuestionClick = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/questions/${cardId}`, {
+      const response = await fetch(`${getBaseUrl()}/questions/${cardId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
