@@ -95,7 +95,7 @@ function Blog() {
               title={type.title}
               content={type.content}
               linkTo={type.linkTo}
-              image={`${getBaseUrl()}${item.image}`}
+              image={`${getBaseUrl()}${type.image}`} 
             />
           ))}
       </Grid>
