@@ -128,7 +128,6 @@ function Profile() {
     }
   };
   console.log(profileData.profilePicture);
-  console.log(`http://localhost:3001${profileData.profilePicture}`);
   return (
     <div className="ProfileContainer">
       {/* First Column */}
