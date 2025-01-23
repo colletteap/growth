@@ -117,6 +117,7 @@ function Profile() {
       });
 
       if (response.ok) {
+        const updatedData = await response.json();
         console.log("Profile updated successfully");
         setProfileData((prev) => ({
           ...prev,
