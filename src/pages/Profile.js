@@ -84,7 +84,6 @@ function Profile() {
         ...profileData,
         profilePicture: profileData.profilePicture,
       });
-      setPreview(profileData.profilePicture);
       console.log("Profile Picture Path:", profileData.profilePicture); // Set the preview
     }
   };
