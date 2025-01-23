@@ -41,7 +41,7 @@ function Profile() {
 
             // Populate the state with user data
             setProfileData({
-              profilePicture: data.profilePicture || "",
+              profilePicture: `${data.profilePicture}?timestamp=${Date.now()}` || "",
               firstName: data.firstName || "",
               title: data.title || "",
               skillsShared: data.skillsShared || 0,
@@ -118,6 +118,10 @@ function Profile() {
 
       if (response.ok) {
         console.log("Profile updated successfully");
+        setProfileData((prev) => ({
+          ...prev,
+          profilePicture: `${updatedData.profilePicture}?timestamp=${Date.now()}`, // Add timestamp to force reload
+        }));
         toggleEdit();
         alert("Profile updated successfully!");
       } else {
