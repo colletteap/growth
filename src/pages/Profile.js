@@ -141,8 +141,12 @@ function Profile() {
             <h2>Profile</h2>
             <img
               className="avatarContainer"
-               src={`${getBaseUrl()}${profileData.profilePicture}`}
-              alt="profile"
+                src={
+    profileData.profilePicture.startsWith("http")
+      ? profileData.profilePicture
+      : `${getBaseUrl()}${profileData.profilePicture}`
+  }
+  alt="profile"
             />
             {isEditing && (
               <input
