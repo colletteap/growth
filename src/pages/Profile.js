@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Profile.css";
-import Avatar from "../assets/avatarplaceholder.png";
 import getBaseUrl from "../utils/getBaseUrl";
 
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);
-  const [preview, setPreview] = useState(Avatar);
   const [profileData, setProfileData] = useState({
-    profilePicture: Avatar,
+    profilePicture: "",
     firstName: "",
     title: "",
     skillsShared: 0,
@@ -43,7 +41,7 @@ function Profile() {
 
             // Populate the state with user data
             setProfileData({
-              profilePicture: data.profilePicture || Avatar,
+              profilePicture: data.profilePicture || "",
               firstName: data.firstName || "",
               title: data.title || "",
               skillsShared: data.skillsShared || 0,
@@ -141,12 +139,8 @@ function Profile() {
             <h2>Profile</h2>
             <img
               className="avatarContainer"
-                src={
-    profileData.profilePicture.startsWith("http")
-      ? profileData.profilePicture
-      : `${getBaseUrl()}${profileData.profilePicture}`
-  }
-  alt="profile"
+                src={profileData.profilePicture}
+                alt="profile"
             />
             {isEditing && (
               <input
