@@ -82,9 +82,9 @@ function Profile() {
     if (file) {
       setProfileData({
         ...profileData,
-        profilePicture: profileData.profilePicture,
+        profilePicture: file,
       });
-      console.log("Profile Picture Path:", profileData.profilePicture); // Set the preview
+      console.log("Profile Picture Path:", file);
     }
   };
 
@@ -102,10 +102,10 @@ function Profile() {
     formData.append("education", profileData.education);
     formData.append("contactInfo", profileData.contactInfo);
     formData.append("favBooks", profileData.favBooks);
-    if (profileData.profilePicture) {
+    if (profileData.profilePicture instanceof File) {
       formData.append("profilePicture", profileData.profilePicture);
     }
-    console.log("Profile Data Before Save:", profileData);
+    console.log("Form Data Before Save:", formData);
 
     try {
       const response = await fetch(`${getBaseUrl()}/profile`, {
@@ -142,7 +142,9 @@ function Profile() {
             <h2>Profile</h2>
             <img
               className="avatarContainer"
-                src={profileData.profilePicture}
+                src={
+                  profileData.profilePicture 
+                  || `${getBaseUrl()}/images/avatarplaceholder.png`}
                 alt="profile"
             />
             {isEditing && (
