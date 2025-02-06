@@ -1,10 +1,18 @@
 import * as React from "react";
 import CustomButton from "../soundReact/customButton";
 import { Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/joy";
+import getBaseUrl from "../utils/getBaseUrl";
 
-export default function SkillButton({ skill, linkTo, onClick }) {
+export default function SkillButton({ skill, onClick }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (onClick) onClick(); 
+    navigate(`${getBaseUrl()}/SkillShell`); 
+  };
+  
   return (
     <Grid
       style={{
@@ -15,11 +23,11 @@ export default function SkillButton({ skill, linkTo, onClick }) {
         justifyItems: "center",
       }}
     >
-      <Link to={linkTo}>
+    
         <CustomButton
           size="large"
           sx={{ minWidth: 180 }}
-          onClick={onClick}
+          onClick={handleClick}
           variant={"Skill"}
           disableSound={true}
         >
@@ -35,7 +43,7 @@ export default function SkillButton({ skill, linkTo, onClick }) {
             {skill}
           </Typography>
         </CustomButton>
-      </Link>
+    
     </Grid>
   );
 }
