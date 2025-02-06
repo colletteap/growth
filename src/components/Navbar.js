@@ -49,7 +49,7 @@ function Navbar() {
       )}
       {mini ? null : (
         <Grid className="rightSide">
-          <SoundToggleButton />
+          
           <Link to="./"> Home </Link>
           <Link to="./SkillShell"> Learn </Link>
           <Link to="./Advice"> Ask </Link>
