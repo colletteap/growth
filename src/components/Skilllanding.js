@@ -4,11 +4,13 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import "../styles/Skilllanding.css";
 import SkillButton from "./Skillbutton";
 import getBaseUrl from "../utils/getBaseUrl";
+import { useNavigate } from "react-router-dom";
 
 const SkillLanding = () => {
   const [skills, setSkills] = useState([]);
   const matches = useMediaQuery("(min-width:768px)");
   console.log("matches", matches);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getSkills = async () => {
@@ -37,11 +39,15 @@ const SkillLanding = () => {
   }, []);
   
 
+  const handleNavigate = () => {
+    navigate("/SkillShell"); // Navigates to /SkillShell
+  };
+
   return (
     <div>
     <h1 className="whiteHeading" style={{ fontSize: '36px' }}>Learn skills from fellow teachers</h1>
 
-      <div>
+    <div onClick={handleNavigate} style={{ cursor: "pointer" }}>
         <div className="skillButton">
           <SkillLandingDropDown />
         </div>
