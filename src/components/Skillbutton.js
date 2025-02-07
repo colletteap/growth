@@ -3,14 +3,13 @@ import CustomButton from "../soundReact/customButton";
 import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/joy";
-import getBaseUrl from "../utils/getBaseUrl";
 
 export default function SkillButton({ skill, onClick }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
     if (onClick) onClick(); 
-    navigate(`${getBaseUrl()}/SkillShell`); 
+    navigate("/SkillShell"); 
   };
   
   return (
