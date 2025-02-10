@@ -41,7 +41,7 @@ const SkillLanding = () => {
     <div>
     <h1 className="whiteHeading" style={{ fontSize: '36px' }}>Learn skills from fellow teachers</h1>
 
-    <div onClick={handleNavigate} style={{ cursor: "pointer" }}>
+    <div style={{ cursor: "pointer" }}>
         <div className="skillButton">
           <SkillLandingDropDown />
         </div>
