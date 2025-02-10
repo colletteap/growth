@@ -6,10 +6,11 @@
     <title>Redirecting...</title>
     <script>
       (function() {
-        var currentPath = window.location.pathname;
-        var basePath = "/growth";
+        var redirectTo = window.location.pathname;
+        
+        var basePath = "/growth"; 
 
-        window.location.replace(basePath + "?redirect=" + encodeURIComponent(currentPath));
+        window.location.replace(basePath + "?redirect=" + encodeURIComponent(redirectTo));
       })();
     </script>
 </head>
