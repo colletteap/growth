@@ -6,16 +6,10 @@
     <title>Redirecting...</title>
     <script>
       (function() {
-        var redirectTo = window.location.pathname;
-        
-        var basePath = "/growth"; 
+        var currentPath = window.location.pathname;
+        var basePath = "/growth";
 
-        if (redirectTo !== basePath && !redirectTo.startsWith(basePath + "/")) {
-            window.location.replace(basePath);
-        } else {
-            // Redirect back to base path while preserving route info
-            window.location.replace(basePath + "/#" + redirectTo.replace(basePath, ""));
-        }
+        window.location.replace(basePath + "?redirect=" + encodeURIComponent(currentPath));
       })();
     </script>
 </head>
