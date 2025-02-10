@@ -32,5 +32,5 @@ In many professions, having a mentor can make a huge difference. This website wi
 
 # **Appreciation**
   
-  Big thanks to @sir.Eti & @samwise-nl for coaching me through the Get Coding program so far!
+  Big thanks to Lucas Hillier, @sir.Eti & @samwise-nl for coaching me through the Get Coding program!
 ******
