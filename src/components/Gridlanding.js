@@ -30,7 +30,9 @@ const GridLanding = () => {
         sx={{ padding: "0 20px 20px 20px" }}
         className="blueLandingContainer"
       >
+        <Link to="/SkillShell">
         <SkillLanding />
+        </Link>
       </Grid>
       <Grid className="adviceLandingContainer">
         <Link to="/Advice" className="textDeco">

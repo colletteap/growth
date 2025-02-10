@@ -16,18 +16,7 @@
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <script>
-      (function() {
-        var params = new URLSearchParams(window.location.search);
-        var redirectPath = params.get("redirect");
-    
-        if (redirectPath) {
-          // Use history.replaceState to update the URL without reloading
-          window.history.replaceState(null, "", redirectPath);
-        }
-      })();
-    </script>
-    
+      
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
